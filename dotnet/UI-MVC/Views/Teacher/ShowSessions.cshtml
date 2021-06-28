@@ -1,0 +1,70 @@
+﻿@using BL.Domain.Sessie
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _Localizer
+@{
+    ViewBag.Title = _Localizer["My Sessions"];
+    Layout = "_Layout";
+}
+
+@section Scripts
+{
+    <script src="~/dist/showSessions.entry.js" defer></script>
+}
+
+<div class="container">
+    <h2>@_Localizer["Sessions"]</h2>
+
+    <button type="button" class="btn btn-primary mb-1" onclick="location.href = '@Url.Action("StartSession", "Teacher", new {PreparingSession = true})'">@_Localizer["Create new session"]</button>
+
+    <h3>@_Localizer["Planned sessions"]</h3>
+    <div id="sessions">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>@_Localizer["Class"]</th>
+                <th>@_Localizer["Test"]</th>
+                <th>@_Localizer["Game type"]</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (TeacherSession teacherSession in ViewBag.TeacherSessions)
+            {
+                <tr onclick="location.href = '@Url.Action("CodeScreen", "Teacher", new {teacherSession.SessionCode, teacherSession.GameType, ClassName = teacherSession.Class.Name})'">
+                    <td>@teacherSession.Class.Name</td>
+                    <td>@teacherSession.Test.Title</td>
+                    <td>@teacherSession.GameType</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <h3>@_Localizer["Past sessions"]</h3>
+    <div id="pastSessions">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>@_Localizer["Class"]</th>
+                <th>@_Localizer["Test"]</th>
+                <th>@_Localizer["Game type"]</th>
+                <th>@_Localizer["Participants"]</th>
+                <th>@_Localizer["Date"]</th>
+            </tr>
+
+            </thead>
+            <tbody>
+            @foreach (TeacherSession teacherSession in ViewBag.EndedTeacherSessions)
+            {
+                <tr onclick="location.href = '@Url.Action("PastTestResult", "Teacher", new {teacherSession.Id, teacherSession.GameType, ClassName = teacherSession.Class.Name})'">
+                    <td>@teacherSession.Class.Name</td>
+                    <td>@teacherSession.Test.Title</td>
+                    <td>@teacherSession.GameType</td>
+                    <td>@teacherSession.StudentSessions.Count</td>
+                    <td>@teacherSession.Date</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "Teacher") + "'")">@_Localizer["Return to dashboard"]</button>
+    </div>
+</div>

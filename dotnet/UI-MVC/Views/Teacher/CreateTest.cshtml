@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _Localizer
+@{
+    ViewBag.Title = _Localizer["Create Test"];
+    Layout = "_Layout";
+}
+
+<div class="container bg-light pb-4">
+    <form method="post" asp-action="MakeNewTest">
+        <hr/>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <h1>@_Localizer["Test Name"]</h1>
+            <input name="testName" type="text" class="form-control"/>
+            <p class="text-danger">@ViewBag.Error</p>
+        </div>
+        <button type="submit" class="btn btn-primary">@_Localizer["Register"]</button>
+    </form>
+</div>
+
+<button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "Teacher") + "'")">@_Localizer["Return to dashboard"]</button>

@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _Localizer
+@{
+    ViewBag.Title = _Localizer["Show Party"];
+    Layout = "_LayoutNoFooter";
+}
+
+<div class="container" id="page-container" style="border-color: @ViewBag.Party.Colour">
+    <div class="container" id="topBar">
+        <div class="row">
+            <div id="logo">
+                <img src="@ViewBag.Party.ImageLink" alt="Logo"/>
+            </div>
+        </div>
+    </div>
+    <div class="container pt-1" id="video">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/@ViewBag.Party.MediaLink"></iframe>
+        </div>
+    </div>
+    <div class="container" id="party-info-container">
+        <h2 style="color: @ViewBag.Party.Colour">@ViewBag.Party.Name</h2>
+        <h4>@_Localizer["Party leader:"] @ViewBag.Party.PartyLeader </h4>
+        <h4>@_Localizer["Orientation:"] @ViewBag.Party.Orientation </h4>
+
+        <p>@ViewBag.Party.Description</p>
+        <div class="container" id="button-container">
+            <form asp-controller="Game" asp-action="PartyResult">
+                <partial name="_HiddenSessieViewModel" model="@Model"/>
+                <button type="submit" class="btn-lg btn-primary mx-auto my-1">@_Localizer["Test result"]</button>
+            </form>
+            <button type="submit" class="btn-lg btn-dark mx-auto my-1" onclick="@("window.location.href='" + @Url.Action("Index", "Game") + "'")">@_Localizer["End game"]</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/dist/showParty.entry.js"></script>
+    <link rel="stylesheet" href="~/dist/showParty.css"/>
+}

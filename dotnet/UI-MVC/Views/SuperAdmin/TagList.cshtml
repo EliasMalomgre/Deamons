@@ -1,0 +1,60 @@
+﻿@inject IViewLocalizer _Localizer
+@using Microsoft.AspNetCore.Mvc.Localization
+@model IEnumerable<BL.Domain.Test.Tag>
+
+@{
+    ViewBag.Title = _Localizer["Tag management"];
+    Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>@_Localizer["Tag"]</th>
+        <th></th>
+    </tr>
+    @{
+        foreach (var tag in Model)
+        {
+            <tr>
+                <td>@tag.Name</td>
+                <td>
+                    | <a asp-action="TagList" asp-route-tagId="@tag.Id">@_Localizer["Edit"]</a>
+                    | <a asp-action="DeleteTag" asp-route-tagId="@tag.Id">@_Localizer["Delete"]</a>
+                </td>
+            </tr>
+        }
+    }
+</table>
+<form asp-action="CreateTag">
+    <div class="form-group">
+        <label for="newTagName">@_Localizer["New tag:"] </label>
+        <input class="form-control" id="newTagName" type="text" name="tagText">
+        <input class="btn btn-primary mt-2" type="submit">
+    </div>
+</form>
+
+@{
+    bool edit = ViewBag.id == null;
+    var id = 0;
+    var text = "none";
+    if (!edit)
+    {
+        id = ViewBag.id;
+        text = ViewBag.text;
+    }
+}
+
+<div id="editTag">
+    <form asp-action="ModifyTag" hidden="@edit">
+        <div class="form-group">
+            <input type="hidden" name="tagId" value="@id">
+            <label for="editTagName">@_Localizer["Edit tag:"] </label>
+            <input class="form-control" type="text" name="editTagName" value="@text">
+            <input class="btn btn-primary my-1" type="submit">
+        </div>
+    </form>
+</div>
+
+<button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "SuperAdmin") + "'")">@_Localizer["Return to dashboard"]</button>

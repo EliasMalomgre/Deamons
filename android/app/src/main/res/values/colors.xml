@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#006daa</color>
+    <color name="colorPrimaryDark">#383939</color>
+    <color name="colorAccent">#5E7CE2</color>
+    <color name="colorPopup">#558B2F</color>
+    <color name="colorPopupBackground">#88000000</color>
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="textLight">#FFFFFF</color>
+    <color name="linkColour">#000000</color>
+
+    <color name="Graph1">#D7263D</color>
+    <color name="Graph2">#1098F7</color>
+    <color name="Graph3">#F49D37</color>
+    <color name="Graph4">#AA1155</color>
+    <color name="Graph5">#F85A3E</color>
+    <color name="Graph6">#E0ACD5</color>
+    <color name="Graph7">#8CB369</color>
+</resources>

@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _Localizer
+
+@{
+    ViewBag.Title = _Localizer["CSV manager"];
+    Layout = "_Layout";
+}
+<div class="bg-light">
+    <h2>@ViewBag.Title</h2>
+    <form enctype="multipart/form-data" asp-action="ManageCSV">
+        <div class="form-group">
+            <label for="stemtest">@_Localizer["Stemtest-file:"]</label>
+            <input id="stemtest" class="form-control" name="files" type="file">
+        </div>
+
+        <div class="form-group">
+            <label for="woordenlijst">@_Localizer["Wordlist-file:"]</label>
+            <input id="woordenlijst" class="form-control" name="files" type="file">
+        </div>
+        <p class="alert-warning">@_Localizer["Warning: the name of the new file must be stemtest.csv or woordenlijst.csv!"]</p>
+        <input type="submit" class="btn btn-primary">
+    </form>
+    <a asp-action="ReSeedDatabase" class="btn btn-warning mt-2">@_Localizer["Reload test"]</a>
+</div>
+@{
+    if (ViewBag.text != null)
+    {
+        <p>@ViewBag.text</p>
+    }
+}
+
+<button type="submit" class="btn btn-primary my-1" onclick="@("window.location.href='" + Url.Action("Index", "SuperAdmin") + "'")">@_Localizer["Return to dashboard"]</button>

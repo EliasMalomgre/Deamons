@@ -1,0 +1,23 @@
+﻿@using BL.Domain.Sessie
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _Localizer
+
+<canvas style="height: 250px" id="chartContainer"></canvas>
+
+<table class="table">
+    <tread>
+        <tr>
+            <th>@_Localizer["Chosen Party"]</th>
+            <th>@_Localizer["Result"]</th>
+        </tr>
+    </tread>
+    <tbody>
+    @foreach (StudentSession session in ViewBag.Students)
+    {
+        <tr >
+            <td>@session.SelectedParty</td>
+            <td>@session.Score</td>
+        </tr>
+    }
+    </tbody>
+</table>

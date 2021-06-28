@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _Localizer;
+
+
+<form method="post" asp-action="SendAccountRequest" class="form-check border-dark">
+    <hr/>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label>@_Localizer["School name"]</label>
+        <input name="schoolName" type="text" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>@_Localizer["Administrator email"]</label>
+        <input name="email" type="email" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>@_Localizer["City"]</label>
+        <input name="city" type="text" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>@_Localizer["Zip"]</label>
+        <input name="postalCode" type="text" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>@_Localizer["Street and number"]</label>
+        <input name="streetAndNumber" type="text" class="form-control"/>
+    </div>
+    <button type="submit" class="btn btn-primary">@_Localizer["Register"]</button>
+</form>

@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model BL.Domain.Identity.Organisation
+@inject IViewLocalizer _Localizer
+
+@{
+    ViewBag.Title = _Localizer["title"];
+    Layout = "_Layout";
+}
+
+<h2 class="mb-0">@_Localizer["School Dashboard"]</h2>
+<h3 class="text-black-50">@Model.Name</h3>
+<div class="container p-2 bg-light text-center">
+    <div class="row pt-1 align-middle justify-content-center">
+        <h3>@_Localizer["General information"]</h3>
+    </div>
+    <div class="row pt-2 ">
+
+        <div class="col-6 pl-5">
+
+            <p class="h4 text-black-50 text-center">
+                @_Localizer["Amount of classes:"]
+
+            </p>
+            <p class="h1 text-black-50 text-center">@ViewBag.AmountOfClasses</p>
+        </div>
+        <div class="col-6 pr-5">
+            <p class="h4 text-black-50 text-center">
+                @_Localizer["Amount of sessions:"]
+            </p>
+            <p class="h1 text-black-50 text-center">@ViewBag.AmountOfSessions</p>
+        </div>
+        <div class="col">
+            <h3></h3>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "Admin") + "'")">@_Localizer["Return to dashboard"]</button>
+</div>

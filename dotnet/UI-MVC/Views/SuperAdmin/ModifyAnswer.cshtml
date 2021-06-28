@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model BL.Domain.Test.Answer
+@inject IViewLocalizer _Localizer
+
+@{
+    ViewBag.Title = _Localizer["Modify Answer"];
+    Layout = "_Layout";
+    var akkoord = Model.ChosenAnswer.Id == 1;
+    var nietAkkoord = !akkoord;
+    string agree = ViewBag.agree;
+    string disagree = ViewBag.disagree;
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>@ViewBag.statement</h4>
+
+<form asp-action="ModifyAnswer">
+    <input type="hidden" name="partyId" value="@ViewBag.party">
+    <input type="hidden" name="answerId" value="@Model.Id">
+    <div class="form-group">
+        <label for="ao">@_Localizer["Answer:"]</label>
+        @{ var possibleAnswers = new List<SelectListItem>
+           {
+               new SelectListItem {Value = "1", Text = agree, Selected = akkoord},
+               new SelectListItem {Value = "2", Text = disagree, Selected = nietAkkoord}
+           }; }
+        <select name="ao" id="ao" asp-items="@possibleAnswers">
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="arg">@_Localizer["Argument"]</label>
+        <input id="arg" name="argument" class="form-control" type="text" value="@Model.Argument">
+    </div>
+    <input type="submit" class="btn btn-primary">
+</form>
+
+<button type="submit" class="btn btn-primary my-1" onclick="@("window.location.href='" + Url.Action("Index", "SuperAdmin") + "'")">@_Localizer["Return to dashboard"]</button>

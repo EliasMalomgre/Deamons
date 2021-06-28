@@ -1,0 +1,33 @@
+﻿@inject IViewLocalizer _Localizer
+@using BL.Domain.Identity
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.SessionViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewBag.Title = _Localizer["Start Session"];
+    Layout = "_Layout";
+}
+
+<div class="frm mt-3 pt-1 mx-5 ">
+    <h2 class="align-self-center">@_Localizer["Enter a sessioncode"]</h2>
+    <form asp-controller="Game" asp-action="Index" method="post" id="form">
+        <input type="number" asp-for="TeacherSessionCode" id="LeerkrachtSessieCode"/>
+        @{
+            var error = "";
+            if (ViewBag.Error != null)
+            {
+                error = ViewBag.Error.ToString();
+            }
+        }
+        <p class="text-danger">@_Localizer[error]</p>
+        <button id="startButton" class="btn btn-primary mb-5">@_Localizer["Start game"]</button>
+    </form>
+</div>
+
+@section Scripts
+{
+    <script src="~/dist/gameIndex.entry.js" defer></script>
+    <link rel="stylesheet" href="~/dist/gameIndex.css"/>
+}

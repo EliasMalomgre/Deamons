@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model BL.Domain.Test.Test
+@inject IViewLocalizer _Localizer
+
+@{
+    ViewBag.Title = _Localizer["Share"];
+    Layout = "_Layout";
+}
+
+<h2>@_Localizer["Share test: " + Model.Title]</h2>
+<a class="btn btn-primary" asp-action="ShareTestWithSchool" asp-route-testId="@Model.Id">@_Localizer["Share to school only"]</a>
+<a class="btn btn-primary" asp-action="ShareTestWithPublic" asp-route-testId="@Model.Id">@_Localizer["Share to public"]</a>
+
+<button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "Teacher") + "'")">@_Localizer["Return to dashboard"]</button>

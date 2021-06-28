@@ -1,0 +1,66 @@
+﻿@inject IViewLocalizer _Localizer
+@using System.Text.RegularExpressions
+@using BL.Domain.Test
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.TeacherSessionViewModel
+
+@{
+    ViewBag.Title = _Localizer["Show Statement"];
+    Layout = "_Layout";
+}
+<div class="container text-center">
+    <h2>@_Localizer["Sessioncode:"] @Model.SessionCode</h2>
+</div>
+<div class="container bg-light w-100 h-100">
+    <div class="progress">
+        <div class="progress-bar" id="progress" role="progressbar" aria-valuenow="@Model.CurrentStatement" aria-valuemin="0" aria-valuemax="@Model.StatementCount"></div>
+    </div>
+
+    <h2 id="statement">
+        @foreach (string word in ViewBag.Statement.Text.Split(' '))
+        {
+            var notChanged = true;
+            if (ViewBag.Definition)
+            {
+                foreach (Definition definition in ViewBag.Definitions)
+                {
+                    if (notChanged && Regex.IsMatch(word, @"\b" + definition.Word + @"[.,?!]?\b", RegexOptions.IgnoreCase))
+                    {
+                        <a href="#">@(word + " ")</a>
+                        <input type="hidden" value="@definition.Explanation" id="@definition.Word"/>
+                        notChanged = false;
+                    }
+                }
+            }
+
+            if (notChanged)
+            {
+                @(word + " ")
+            }
+        }
+    </h2>
+
+    <h3>@_Localizer["Amount of answers:"] @ViewBag.AnswerCount/@Model.CurrentStudentCount </h3>
+    @if (ViewBag.Statement.Explanation != "")
+    {
+        <p id="info" style="display: none">@ViewBag.Statement.Explanation</p>
+        <button class="btn btn-primary" id="extra">@_Localizer["Show extra information"]</button>
+    }
+    <form asp-controller="Teacher" asp-action="StatementResult">
+        <partial name="_HiddenTeacherSessionViewModel" model="@Model"/>
+        <button class="btn btn-primary my-2" type="submit">@_Localizer["Result"]</button>
+    </form>
+</div>
+
+<div id="definitionField" class="container bg-light w-100 h-100" style="display: none">
+    <h4 id="word"></h4>
+    <p id="explanation"></p>
+</div>
+
+@section Scripts
+{
+    <script src="~/dist/defenitions.entry.js" defer></script>
+    <script src="~/dist/showStatement.entry.js" defer></script>
+    <script src="~/dist/progressbar.entry.js" defer></script>
+    <script src="~/dist/listenForRefresh.entry.js" defer></script>
+}

@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model BL.Domain.Identity.ApplicationUser
+@inject IViewLocalizer _Localizer
+
+@{
+    ViewBag.Title = _Localizer["Modify teacher"];
+    Layout = "_Layout";
+}
+
+<h2 class="mb-0">@_Localizer["Modify teacher"]</h2>
+<h2 class="text-black-50">@_Localizer["Change info"]</h2>
+<div class="container bg-light p-2 py-4">
+<form method="post" asp-for-id="@Model.Id" asp-action="ModifyTeacher">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" name="id" value="@Model.Id">
+    <div class="form-group mb-0">
+        <label class="h5 mb-2">@_Localizer["Email"]</label>
+        <input id="email" name="email" type="email" value="@ViewBag.Email" class="form-control w-50"/>
+        <button type="submit" class="btn btn-primary mb-1 mt-2 h-75 w-25">@_Localizer["Update"]</button>
+    </div>
+</form>
+<form method="post" asp-action="DeleteTeacher" class="" asp-for-id="@Model.Id">
+    <input type="hidden" name="id"  value="@Model.Id">
+    <input class="btn btn-primary mb-1 h-75 w-25" type="submit" value="Delete"/>
+</form>
+
+<button type="submit" class="btn btn-primary mb-1 h-75 w-25" onclick="@("window.location.href='" + Url.Action("Index", "Admin") + "'")">@_Localizer["Return to dashboard"]</button>
+</div>

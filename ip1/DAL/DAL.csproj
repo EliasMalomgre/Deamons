@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <AssemblyName>DAL</AssemblyName>
+        <RootNamespace>Stemtest.DAL</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="RepositoriesHC\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+</Project>

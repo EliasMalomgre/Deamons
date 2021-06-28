@@ -1,0 +1,55 @@
+﻿@use "variables" as v;
+
+@use "bootstrap/scss/bootstrap" with (
+$body-bg: v.$background,
+$primary: v.$primary,
+$secondary: v.$secondary,
+$input-bg: v.$input,
+$spacer: 5rem
+);
+
+#page-container {
+  background-color: rgba(111,111,111,0.4);
+  border-radius: 50px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+#video {
+  text-align: center;
+  padding: 5%;
+}
+
+#logo {
+  width: 30%;
+  margin: 0.2rem auto 0.2rem auto;
+  img {
+    width: 100%;
+  }
+}
+
+#topBar {
+  border-radius: 10%;
+  h2 {
+    display: block;    
+  }
+}
+
+#button-container {
+  margin: 0.1rem auto 0.1rem auto;
+  text-align: center;
+}
+
+#party-info-container {
+  margin: 0.1rem auto 0.1rem auto;
+  h4 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h2 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

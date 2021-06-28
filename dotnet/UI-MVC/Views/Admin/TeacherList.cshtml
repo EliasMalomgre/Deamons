@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model IEnumerable<BL.Domain.Identity.ApplicationUser>
+@inject IViewLocalizer _Localizer
+@{
+    ViewBag.Title = _Localizer["Teacher List"];
+    Layout = "_Layout";
+}
+
+<h2>Teachers</h2>
+<table class="table">
+    <tr>
+        <th>@_Localizer["Email"]</th>
+        <th>@_Localizer["Status"]</th>
+    </tr>
+    @foreach (var teacher in Model)
+    {
+        <tr>
+            <td>@teacher.Email</td>
+            @if (teacher.EmailConfirmed)
+            {
+                <td>@_Localizer["Activated"]</td>
+            }
+            else
+            {
+                <td>@_Localizer["Not activated"]</td>
+            }
+            <td>
+                | <a asp-action="ModifyTeacher" asp-route-teacherId="@teacher.Id">@_Localizer["Edit"]</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "Admin") + "'")">@_Localizer["Return to dashboard"]</button>

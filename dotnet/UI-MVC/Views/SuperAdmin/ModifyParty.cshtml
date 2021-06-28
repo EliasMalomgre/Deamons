@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model BL.Domain.Test.Party
+@inject IViewLocalizer _Localizer
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form asp-action="ModifyParty">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" name="partyId" value="@Model.Name">
+    <div class="form-group">
+        <label for="orientation">@_Localizer["Orientation"]</label>
+        <input type="text" id="orientation" name="orientation" class="form-control" value="@Model.Orientation"/>
+    </div>
+    <div class="form-group">
+        <label for="partyLeader">@_Localizer["Party Leader"]</label>
+        <input type="text" id="partyLeader" name="partyLeader" class="form-control" value="@Model.PartyLeader">
+    </div>
+    <div class="form-group">
+        <label for="colour">@_Localizer["Colour"]</label>
+        <input type="text" id="colour" name="colour" class="form-control" value="@Model.Colour">
+    </div>
+    <button type="submit" class="btn btn-primary mb-1">@_Localizer["Save Changes"]</button>
+</form>
+<a asp-action="ModifyAnswers" asp-route-partyId="@Model.Name" class="btn btn-primary">@_Localizer["Change Answers"]</a>
+
+<button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "SuperAdmin") + "'")">@_Localizer["Return to dashboard"]</button>

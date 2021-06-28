@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _Localizer
+@{
+    ViewBag.Title = _Localizer["For schools"];
+    Layout = "_Layout";
+}
+
+<h1 class="h1">@_Localizer["I would like to register my school"]</h1>
+<div class="container bg-light">
+    <h2>@_Localizer["Register now"]</h2>
+    <p>@_Localizer["Your request will be reviewed and aproved by an administrator."]</p>
+    <a class="btn btn-primary btn-lg mb-1" asp-controller="Home" asp-action="RequestSchoolAccount">@_Localizer["Request registration"]</a>
+</div>

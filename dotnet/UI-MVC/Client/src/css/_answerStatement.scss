@@ -1,0 +1,38 @@
+﻿@use "variables" as v;
+
+@use "bootstrap/scss/bootstrap" with (
+  $body-bg: v.$background,
+  $primary: v.$primary,
+  $secondary: v.$secondary,
+  $input-bg: v.$input,
+  $light: v.$light
+);
+
+#container{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.footer{
+  background-color: lightblue;
+  //filter: grayscale(100%);
+}
+
+
+#container {
+  width: 100%;
+  display: inline-block;
+}
+
+#frm{
+  min-height: 330px;
+}
+main{
+  
+}
+.navbar{
+  background-color: transparent;
+  visibility: hidden;
+
+}

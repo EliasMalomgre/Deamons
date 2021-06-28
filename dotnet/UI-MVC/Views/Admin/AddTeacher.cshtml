@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.CreateTeacherModelView
+@inject IViewLocalizer _Localizer
+@{
+    ViewBag.Title = _Localizer["Create teacher"];
+    Layout = "_Layout";
+}
+
+<h2>@_Localizer["Add a teacher"]</h2>
+<div class="container py-3 px-2 bg-light">
+<form method="post" asp-action="AddTeacher">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label class="h5 mb-2">@_Localizer["Teacher email"]</label>
+        <input name="email" type="email" class="form-control pt-0 w-50"/>
+    </div>
+    <p class="text-danger">@ViewBag.Error</p>
+    <button type="submit" class="btn mt-1 btn-primary">@_Localizer["Register"]</button>
+</form>
+
+<button type="submit" class="btn btn-primary my-1" onclick="@("window.location.href='" + Url.Action("Index", "Admin") + "'")">@_Localizer["Return to dashboard"]</button>
+</div>

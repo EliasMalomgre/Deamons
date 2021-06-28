@@ -1,0 +1,41 @@
+﻿@inject IViewLocalizer _Localizer
+@using BL.Domain.Test
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.TeacherSessionViewModel
+
+@{
+    ViewBag.Title = _Localizer["Select statements"];
+    Layout = "_Layout";
+}
+<div class="container bg-light">
+    <h2 class="h2">@_Localizer["Select the statements you want to use"]</h2>
+
+
+    <p id="error" class="text-danger"></p>
+    <table class="table" id="statements">
+        <tr>
+            <th>@_Localizer["Selected"]</th>
+            <th>@_Localizer["Statement"]</th>
+        </tr>
+        @foreach (Statement statement in ViewBag.Test.Statements)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" value="true" name="check" id="@statement.Id"/>
+                </td>
+                <td>@statement.Text</td>
+            </tr>
+        }
+    </table>
+
+    <form class="form mb-5" asp-controller="Teacher" asp-action="SelectSatementsTest" id="select">
+        <partial name="_HiddenTeacherSessionViewModel" model="@Model"/>
+        <input type="hidden" name="preparingSession" value="@ViewBag.PreparingSession.ToString()"/>
+        <button type="submit" class="btn btn-primary mt-1" id="submit">@_Localizer["Select these statements from test"]</button>
+    </form>
+</div>
+
+@section Scripts
+{
+    <script src="~/dist/selectStatements.entry.js" defer></script>
+}

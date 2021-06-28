@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragments.Connect">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
+
+        <TextView
+            android:id="@+id/txtTitel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/allerta"
+            android:text="@string/txtTitel"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtWelkom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/allerta"
+            android:text="@string/txtWelcome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitel" />
+
+        <EditText
+            android:id="@+id/etConnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:autofillHints="ID"
+            android:ems="10"
+            android:fontFamily="@font/allerta"
+            android:hint="@string/etConnect"
+            android:inputType="number"
+            android:numeric="decimal"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtWelkom"
+            tools:ignore="LabelFor" />
+
+        <life.sabujak.roundedbutton.RoundedButton
+            android:id="@+id/btnConnect"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="230dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/allerta"
+            android:text="@string/btnConnect"
+            app:buttonColor="@color/colorAccent"
+            app:buttonCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+        <life.sabujak.roundedbutton.RoundedButton
+            android:id="@+id/btnScanQr"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="230dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/allerta"
+            android:text="@string/btnScanQr"
+            app:buttonColor="@color/colorAccent"
+            app:buttonCornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnConnect" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/allerta"
+            android:text="@string/by_team_daemons"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <life.sabujak.roundedbutton.RoundedButton
+            android:id="@+id/btnPrivacyConnect"
+            android:layout_width="230dp"
+            android:layout_height="70dp"
+            android:layout_margin="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/allerta"
+            android:gravity="center"
+            android:padding="24dp"
+            android:text="@string/privacy_overeenkomst"
+            android:textColor="@color/textLight"
+            android:textSize="14sp"
+            app:buttonColor="@color/colorAccent"
+            app:buttonCornerRadius="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnScanQr" />
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gifConnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:src="@drawable/loading"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.463"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            android:visibility="invisible"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

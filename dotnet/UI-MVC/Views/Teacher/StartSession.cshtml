@@ -1,0 +1,102 @@
+@inject IViewLocalizer _Localizer
+@using BL.Domain.Sessie
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.StartSessionViewModel
+
+
+@{
+    ViewBag.Title = _Localizer["Start Session"];
+    Layout = "_Layout";
+}
+<p>@ViewBag.poep</p>
+<div class="container bg-light p-2 mt-2">
+    <h2>@_Localizer["Select a class and test"]</h2>
+
+    <form id="sessionForm" asp-controller="Teacher" asp-action="InitialiseSession">
+        <div class="form-group">
+            <label for="className">@_Localizer["Classes"]</label>
+            <select id="className" asp-for="ClassName" asp-items="@ViewBag.ClassNames" class="form-control"></select>
+        </div>
+
+        <p id="error" class="text-danger"></p>
+        <div class="form-group">
+            <label for="type">@_Localizer["Gametypes"]</label>
+            <select asp-for="Type" id="type" class="form-control">
+                @{
+                    foreach (var gameType in Enum.GetValues(typeof(GameType)))
+                    {
+                        <option value="@gameType.ToString()">@_Localizer[gameType.ToString().ToLowerInvariant()]</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group" id="tests">
+            <label for="test">@_Localizer["Test"]</label>
+            <select id="test" asp-for="Test" asp-items="@ViewBag.Tests" class="form-control"></select>
+            <input type="checkbox" class="mt-2" id="select"/>
+            <label for="select">@_Localizer["Select certain statements from this test"]</label>
+            <input type="hidden" name="selectStatements" value="false"/>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" id="arguments" asp-for="Arguments"/>
+            <label for="arguments">@_Localizer["Arguments must be used"]</label>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="definitions" asp-for="Definitions"/>
+            <label for="definitions">@_Localizer["Enable word definitions"]</label>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="skip" asp-for="Skip"/>
+            <label for="skip">@_Localizer["Allow skipping questions"]</label>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="forceWaiting" asp-for="ForceWaiting"/>
+            <label for="forceWaiting">@_Localizer["Students don't have to wait to answer"]</label>
+        </div>
+        <div class="form-group" id="colourGroup">
+            <input type="checkbox" id="customColors"/>
+            <label for="customColors">@_Localizer["Pick custom colors for the waiting screen"]</label>
+            <div id="colours" class="row" style="display: none">
+                <div class="col-3" id="colour1group">
+                    <label for="colour1">@_Localizer["Answer option 1"]</label>
+                    <select class="form-control" id="colour1" asp-for="Colour1"></select>
+                </div>
+                <div class="col-3" id="colour2group">
+                    <label for="colour2">@_Localizer["Answer option 2"]</label>
+                    <select class="form-control" id="colour2" asp-for="Colour2"></select>
+                </div>
+                <div class="col-3" id="colour3group">
+                    <label for="colour3">@_Localizer["Answer option 3"]</label>
+                    <select class="form-control" id="colour3" asp-for="Colour3"></select>
+                </div>
+                <div class="col-3" id="colour4group">
+                    <label for="colour4">@_Localizer["Answer option 4"]</label>
+                    <select class="form-control" id="colour4" asp-for="Colour4"></select>
+                </div>
+                <div class="col-3" id="colour5group">
+                    <label for="colour5">@_Localizer["Answer option 5"]</label>
+                    <select class="form-control" id="colour5" asp-for="Colour5"></select>
+                </div>
+                <div class="col-3" id="colour6group">
+                    <label for="colour6">@_Localizer["Answer option 6"]</label>
+                    <select class="form-control" id="colour6" asp-for="Colour6"></select>
+                </div>
+                <div class="col-3" id="skipColourGroup" style="display: none">
+                    <label for="skipColour">@_Localizer["Skiping statement"]</label>
+                    <select class="form-control" id="skipColour" asp-for="SkipColour"></select>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" value="@ViewBag.PreparingSession" asp-for="PreparingSession"/>
+        <button type="submit" class="btn btn-primary">@_Localizer["Use settings"]</button>
+    </form>
+</div>
+
+<button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "Teacher") + "'")">@_Localizer["Return to dashboard"]</button>
+
+@section Scripts
+{
+    <script src="~/dist/startSession.entry.js" defer></script>
+}

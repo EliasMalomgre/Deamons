@@ -1,0 +1,14 @@
+﻿@inject IViewLocalizer _Localizer
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.RegisterSchoolViewModel
+@{
+    ViewBag.Title = _Localizer["Request account"];
+    Layout = "_Layout";
+}
+
+<h2>@_Localizer["Create school account"]</h2>
+<div class="bg-light pb-2 px-2">
+    <partial name="_RequestAccount"/>
+</div>
+
+<button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "SuperAdmin") + "'")">@_Localizer["Return to dashboard"]</button>

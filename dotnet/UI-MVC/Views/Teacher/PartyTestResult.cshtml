@@ -1,0 +1,24 @@
+﻿@inject IViewLocalizer _Localizer
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.TeacherSessionViewModel
+
+@{
+    ViewBag.Title = _Localizer["Test Result"];
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <h2>@_Localizer["Test Result"]</h2>
+    <p>@_Localizer["Class:"] @Model.ClassName</p>
+    <partial name="_StudentPartyResults"/>
+    <form asp-controller="Teacher" asp-action="EndSession">
+        <input type="hidden" name="sessionCode" id="sessionCode" value="@Model.SessionCode"/>
+        <button type="submit" class="btn btn-primary">@_Localizer["End Session"]</button>
+    </form>
+</div>
+
+@section Scripts
+{
+    <script src="~/dist/partyResult.entry.js" defer></script>
+    <script src="~/dist/listenForRefresh.entry.js" defer></script>
+}

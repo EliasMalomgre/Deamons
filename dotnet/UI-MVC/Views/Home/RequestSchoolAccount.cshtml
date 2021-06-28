@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.SchoolRequestEmailViewModel
+@inject IViewLocalizer _Localizer;
+
+@{
+    ViewBag.Title = _Localizer["Request Account"];
+    Layout = "_Layout";
+}
+
+<h2 class="h2 font-weight-bolder">@_Localizer["Send a request"]</h2>
+<partial name="_RequestAccount"/>

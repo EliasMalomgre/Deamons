@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _Localizer
+@{
+    ViewBag.Title = _Localizer["Index"];
+    Layout = "_Layout";
+}
+<h2>Admin Dashboard</h2>
+<div class="row">
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/create.png" class="card-img-top w-25 align-self-center" alt=@_Localizer["Add a teacher"]>
+        <div class="card-body">
+            <h5 class="card-title">@_Localizer["Add a teacher"]</h5>
+            <p class="card-text">@_Localizer["Add a new teacher right here."]</p>
+            <a asp-action="AddTeacher" class="btn  btn-primary btn-lg">@_Localizer["Add a teacher"]</a>
+        </div>
+    </div>
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/manage.png" class="card-img-top w-25 align-self-center" alt=@_Localizer["Dashboard"]>
+        <div class="card-body">
+            <h5 class="card-title">@_Localizer["Dashboard"]</h5>
+            <p class="card-text">@_Localizer["Go to your schools Dashboard."]</p>
+            <a asp-action="Dashboard" class="btn btn-primary btn-lg">@_Localizer["Dashboard"]</a>
+        </div>
+    </div>
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/manage.png" class="card-img-top w-25 align-self-center" alt="@_Localizer["Edit data"]">
+        <div class="card-body">
+            <h5 class="card-title">@_Localizer["Edit data"]</h5>
+            <p class="card-text">@_Localizer["Edit You school info here."]</p>
+            <a asp-action="ModifyAdmin" class="btn btn-primary btn-lg">@_Localizer["Edit data"]</a>
+        </div>
+    </div>
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/manage.png" class="card-img-top w-25 align-self-center" alt="@_Localizer["Teachers"]">
+        <div class="card-body">
+            <h5 class="card-title">@_Localizer["Teachers"]</h5>
+            <p class="card-text">@_Localizer["Show and edit all of your teachers here."]</p>
+            <a asp-action="TeacherList" class="btn btn-primary btn-lg">@_Localizer["Teachers"]</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="module" src="~/dist/teacherIndex.entry.js" defer></script>
+    <link rel="stylesheet" href="~/dist/teacherIndex.css"/>
+}

@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model BL.Domain.Test.Statement
+@inject IViewLocalizer _Localizer
+
+@{
+    ViewBag.Title = _Localizer["Edit statement"];
+    Layout = "_Layout";
+}
+
+<h2 class="h2">@ViewBag.Title</h2>
+<div class="container">
+    <form asp-action="ModifyStatement">
+        <input type="hidden" name="statementId" value="@Model.Id">
+        <div class="col">
+            <div class="form-group row">
+                <label for="statement">@_Localizer["Statement"]</label>
+                <input name="statementName" id="statement" type="text" class="form-control" value="@Model.Text">
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group row">
+                <label for="explanation">@_Localizer["Explanation"]</label>
+                <input name="statementExplanation" id="explanation" type="text" class="form-control" value="@Model.Explanation">
+            </div>
+        </div>
+        <div id="answerOptions" class="form-group">
+            @{
+                var count = 1;
+                foreach (var sao in Model.AnswerOptions)
+                {
+                    <div id="@("AoGroup" + count)" class="form-group">
+                        <input id="@("AoText" + count)" class="form-control" type="text" name="answerOptions" value="@sao.AnswerOption.Opinion" readonly="@(sao.AnswerOption.Id == 3)"/>
+                        <label id="@("AoLabel" + count)">@_Localizer["Is correct:"] </label>
+                        <input id="@("AoCheck" + count)" type="checkbox" checked="@sao.isCorrectAnswer" value="@sao.isCorrectAnswer" disabled="@(sao.AnswerOption.Id == 3)"/>
+                        <input type="hidden" id="@("AoHid" + count)" name="aoc" value="@sao.isCorrectAnswer"/>
+                        <button type="button" id="@("removeAoBtn" + count)" disabled="@(sao.AnswerOption.Id == 3)">Remove</button>
+                    </div>
+                    count++;
+                }
+                <input id="removeCount" type="hidden" value="@count"/>
+            }
+        </div>
+        <button type="button" id="addAnswerOption">@_Localizer["Add answer option"]</button>
+        <input type="submit" class="btn btn-primary">
+    </form>
+</div>
+
+<button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "Teacher") + "'")">@_Localizer["Return to dashboard"]</button>
+
+
+@section Scripts
+{<script src="~/dist/modifyStatement.entry.js" defer></script>}

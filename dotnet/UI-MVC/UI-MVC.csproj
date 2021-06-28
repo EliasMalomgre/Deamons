@@ -1,0 +1,212 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+      <MpaRoot>Client\</MpaRoot>
+      <WWWRoot>wwwroot\</WWWRoot>
+      <DefaultItemExcludes>$(DefaultItemExcludes);$(MpaRoot)node_modules\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Google.Cloud.Storage.V1" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+    <PackageReference Include="QRCoder" Version="1.3.9" />
+    <PackageReference Include="SendGrid" Version="9.14.1" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\site.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\site.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\site.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\signalr\dist\browser\signalr.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\signalr\dist\browser\signalr.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\answerStatement.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\answerStatement.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\bootstrap_js.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\bootstrap_js.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\bootstrap_js.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\bootstrap_js.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\debateResult.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\debateResult.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\f2485e1914b38f2550829c71801c5381.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\gameIndex.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\gameIndex.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\gameIndex.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\gameIndex.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\listenForRefresh.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\listenForRefresh.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\modifyStatement.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\modifyStatement.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\modifyTest.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\modifyTest.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\partiesSelection.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\partiesSelection.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\partySelection.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\partySelection.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\progressbar.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\progressbar.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\refreshPage.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\refreshPage.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\result.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\result.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\selectStatements.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\selectStatements.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\sendRefreshSignal.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\sendRefreshSignal.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\showSessions.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\showSessions.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\showStatement.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\showStatement.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\signalr.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\signalr.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\site.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\site.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\startSession.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\startSession.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\statementResult.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\statementResult.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\statementsresult.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\statementsresult.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\teacherGame.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\teacherGame.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\validation.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\validation.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\waitForTest.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\waitForTest.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\waitingScreen.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\waitingScreen.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\answerStatement.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\answerStatement.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\waitingScreen.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\waitingScreen.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\canvasJS.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\canvasJS.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\customDebateResult.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\customDebateResult.entry.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\showStatement.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\showStatement.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\pastCustomDebateResult.entry.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\dist\pastCustomDebateResult.entry.js.map" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\BL\BL.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+    <ItemGroup>
+        <!-- Don't publish the MPA source files, but do show them in the project files list -->
+        <Content Remove="$(MpaRoot)**" />
+        <Content Include="Client\src\css\gameindex.scss" />
+        <Content Include="Client\src\css\style.scss" />
+        <Content Include="Client\src\css\_answerStatement.scss" />
+        <Content Include="Client\src\css\_bootstrap.scss" />
+        <Content Include="Client\src\css\_buttons.scss" />
+        <Content Include="Client\src\css\_checkboxes.scss" />
+        <Content Include="Client\src\css\_duringgame.scss" />
+        <Content Include="Client\src\css\_mixins.sass" />
+        <Content Include="Client\src\css\_showParty.scss" />
+        <Content Include="Client\src\css\_tables.scss" />
+        <Content Include="Client\src\css\teacher.scss" />
+        <Content Include="Client\src\css\_variables.scss" />
+        <Content Include="Client\src\css\_waitingScreen.scss" />
+        <Content Include="Client\src\img\bg-img.jpg">
+          <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+          <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+        <Content Include="Client\src\img\blur.png" />
+        <Content Include="Client\src\img\bg.png" />
+        <Content Include="Client\src\js\game\debateResult.js" />
+        <Content Include="Client\src\js\game\gameIndex.js" />
+        <Content Include="Client\src\js\game\partySelection.js" />
+        <Content Include="Client\src\js\game\result.js" />
+        <Content Include="Client\src\js\game\answerStatement.js" />
+        <Content Include="Client\src\js\game\showParty.js" />
+        <Content Include="Client\src\js\game\statementsResult.js" />
+        <Content Include="Client\src\js\game\waitingScreen.js" />
+        <Content Include="Client\src\js\shared\definitions.js" />
+        <Content Include="Client\src\js\shared\homeIndex.js" />
+        <Content Include="Client\src\js\shared\progressbar.js" />
+        <Content Include="Client\src\js\signalr\listenForRefresh.js" />
+        <Content Include="Client\src\js\signalr\refreshCodeScreen.js" />
+        <Content Include="Client\src\js\signalr\sendRefreshSignal.js" />
+        <Content Include="Client\src\js\signalr\signalr.js" />
+        <Content Include="Client\src\js\signalr\signalr.min.js" />
+        <Content Include="Client\src\js\signalr\teacherGame.js">
+          <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+          <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+        <Content Include="Client\src\js\signalr\waitForTest.js">
+          <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+          <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+        <Content Include="Client\src\js\teacher\customDebateResult.js" />
+        <Content Include="Client\src\js\teacher\showCharts.js" />
+        <Content Include="Client\src\js\teacher\teacherIndex.js" />
+        <Content Include="Client\src\js\teacher\ModifyStatement.js" />
+        <Content Include="Client\src\js\teacher\modifyTest.js" />
+        <Content Include="Client\src\js\teacher\partyResult.js" />
+        <Content Include="Client\src\js\teacher\pastCustomDebateResult.js" />
+        <Content Include="Client\src\js\teacher\pastPartyResult.js" />
+        <Content Include="Client\src\js\teacher\selectStatements.js" />
+        <Content Include="Client\src\js\teacher\ShowSessions.js" />
+        <Content Include="Client\src\js\teacher\showStatement.js" />
+        <Content Include="Client\src\js\teacher\startSession.js" />
+        <Content Include="Client\src\js\teacher\statementResult.js" />
+        <Content Include="Client\src\js\teacher\test.js" />
+        <None Remove="$(MpaRoot)**" />
+        <None Include="$(MpaRoot)**" Exclude="$(MpaRoot)node_modules\**" />
+        <None Include="Client\src\img\qualBackground.jpg" />
+        <Content Update="Views\Shared\_LayoutNoFooter.cshtml">
+          <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+          <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\controllers\TeacherController.nl.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+      </EmbeddedResource>
+    </ItemGroup>
+    
+    <Target Name="NpmInstall" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(MpaRoot)node_modules') ">
+        <!-- Ensure Node.js is installed -->
+        <Exec Command="node --version" ContinueOnError="true">
+            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+        </Exec>
+        <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+        <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+        <Exec WorkingDirectory="$(MpaRoot)" Command="npm install" />
+    </Target>
+
+    <Target Name="NpmRunBuild" BeforeTargets="Build" DependsOnTargets="NpmInstall">
+        <Exec WorkingDirectory="$(MpaRoot)" Command="npm run build" />
+    </Target>
+
+    <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+        <!-- Include the newly-built files in the publish output -->
+        <ItemGroup>
+            <DistFiles Include="$(WWWRoot)dist\**" />
+            <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+                <RelativePath>%(DistFiles.Identity)</RelativePath>
+                <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+                <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            </ResolvedFileToPublish>
+        </ItemGroup>
+    </Target>
+
+    <Target Name="NpmClean" BeforeTargets="Clean">
+        <RemoveDir Directories="$(WWWRoot)dist" />
+    </Target>
+    
+
+</Project>

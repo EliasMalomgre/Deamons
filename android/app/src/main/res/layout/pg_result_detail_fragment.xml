@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragments.partygame.PgResultDetail">
+
+    <TextView
+        android:id="@+id/PgResultDetailStatement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Stelling"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/PgResultDetailStatementInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="173dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginEnd="179dp"
+        android:text="stelling uilteg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PgResultDetailStatement" />
+
+    <TextView
+        android:id="@+id/PgResultDetailYourAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="180dp"
+        android:text="jouw antwoord"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PgResultDetailStatementInfo" />
+
+    <TextView
+        android:id="@+id/PgResultDetailYourArguments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="jouw argumentering"
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="383dp" />
+
+    <TextView
+        android:id="@+id/PgResultDetailPartyAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="171dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="181dp"
+        android:text="partijantwoord"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PgResultDetailYourArguments" />
+
+    <TextView
+        android:id="@+id/PgResultDetailPartyArgument"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="166dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="186dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PgResultDetailPartyAnswer" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

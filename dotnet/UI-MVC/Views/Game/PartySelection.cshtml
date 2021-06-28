@@ -1,0 +1,29 @@
+﻿@inject IViewLocalizer _Localizer
+@using BL.Domain.Test
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.SessionViewModel
+@{
+    ViewBag.Title = _Localizer["Party Selection"];
+    Layout = "_LayoutNoFooter";
+}
+
+<h2 class="h2">@_Localizer["Select the party you want to use for the Partygame"]</h2>
+
+<form asp-controller="Game" asp-action="PartySelection" method="post" id="partyParent">
+    <partial name="_HiddenSessieViewModel" model="@Model"/>
+    <div class="container">
+        @foreach (Party party in ViewBag.Parties)
+        {
+            <button id="@party.Name" class="btn ml-auto party-selection-button">
+                <img src="@party.ImageLink" alt="Party logo">
+            </button>
+        }
+        
+
+    </div>
+</form>
+
+@section Scripts
+{
+    <script src="~/dist/partySelection.entry.js" defer></script>
+}

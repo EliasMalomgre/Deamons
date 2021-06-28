@@ -1,0 +1,13 @@
+﻿@use "variables" as v;
+
+@use "bootstrap/scss/bootstrap" with (
+  $body-bg: v.$background,
+  $primary: v.$primary,
+  $secondary: v.$secondary,
+  $input-bg: v.$input,
+  $spacer: 5rem
+);
+
+#frm{
+  height: 100%;
+}

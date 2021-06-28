@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model Dictionary<BL.Domain.Identity.Organisation, int[]>
+@inject IViewLocalizer _Localizer
+@{
+    ViewBag.Title = _Localizer["Admin list"];
+    Layout = "_Layout";
+}
+
+<h2>@_Localizer["List of schools"]</h2>
+<form asp-controller="SuperAdmin" asp-action="AdminList" method="get">
+    <p>
+        Title: <input class="form-control" type="text" name="searchString" placeholder="Search" aria-label="Search">
+        <input type="submit" class="btn-primary mt-1" value="Filter"/>
+    </p>
+</form>
+<table class="table">
+    <tr>
+        <th>@_Localizer["Name"]</th>
+        <th>@_Localizer["Address"]</th>
+        <th>@_Localizer["Amount of classes"]</th>
+        <th>@_Localizer["Dashboard"]</th>
+        <th>@_Localizer["Block"]</th>
+    </tr>
+    @foreach (var school in Model)
+    {
+        <tr>
+            <td>@school.Key.Name</td>
+            <td>@(school.Key.City + ", " + school.Key.Postalcode + ", " + school.Key.StreetAndNumber)</td>
+            <td>@school.Value[0]</td>
+            <td>
+                <a asp-action="Dashboard" asp-controller="Admin" asp-route-adminId="@school.Value[1]">@_Localizer["Dashboard"]</a>
+            </td>
+            @if (!school.Key.Blocked)
+            {
+                <td>
+                    <a asp-action="BlockSchool" asp-route-id="@school.Key.Id">@_Localizer["Block"]</a>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <a asp-action="UnBlockSchool" asp-route-id="@school.Key.Id">@_Localizer["Unblock"]</a>
+                </td>
+            }
+
+        </tr>
+    }
+</table>
+
+<button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "SuperAdmin") + "'")">@_Localizer["Return to dashboard"]</button>

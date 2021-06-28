@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.SessionViewModel
+@inject IViewLocalizer _Localizer
+
+@{
+    ViewBag.Title = _Localizer["Waiting Screen"];
+    Layout = "_LayoutNoFooter";
+}
+
+<div class="container p-1 mt-3" id="waitingS">
+    <h1>@ViewBag.SessionTitle</h1>
+    <p>@ViewBag.SchoolName</p>
+    <p>@ViewBag.ClassName</p>
+
+    <h1 class="modal-header mb-1">>@_Localizer["Waiting on teacher..."]</h1>
+    <div class="container mt-1">
+        <div class="loader">
+            <div class="loaderBar"></div>
+        </div>
+    </div>
+
+
+    <div class="container mt-4" id="priv">
+        <h2 class="h2 ">@_Localizer["Privacy statement"]</h2>
+        <p class="p">@_Localizer["The Information which you give us is beïng kept without linking this to your personal data with which you can be identified."]</p>
+    </div>
+
+    <form asp-controller="Game" asp-action="AnswerStatement" method="post" id="form">
+        <partial name="_HiddenSessieViewModel" model="@Model"/>
+        <button type="submit" class="btn btn-primary" id="btnNext">@_Localizer["Continue"]</button>
+    </form>
+
+    <input type="hidden" value="@ViewBag.Colour" id="colour"/>
+</div>
+
+@section Scripts
+{
+
+    <link rel="stylesheet" href="~/dist/waitingScreen.css"/>
+    <script src="~/dist/waitingScreen.entry.js" defer></script>
+    <script src="~/dist/signalr.entry.js" defer></script>
+    <script src="~/dist/waitForTest.entry.js" type="text/javascript" defer></script>
+}

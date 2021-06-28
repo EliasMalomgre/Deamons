@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="stemtestdb@84.196.152.79" uuid="2028c117-06a4-486a-9cbe-2b1b436b9871">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://84.196.152.79:3306/stemtestdb</jdbc-url>
+      <driver-properties>
+        <property name="serverTimezone" value="Europe/Brussels" />
+      </driver-properties>
+    </data-source>
+  </component>
+</project>

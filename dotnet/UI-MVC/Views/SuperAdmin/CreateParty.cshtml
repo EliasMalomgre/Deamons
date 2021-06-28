@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _Localizer
+
+@{
+    ViewBag.Title = _Localizer["New Party"];
+    Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form method="post" asp-action="CreateParty">
+    <hr/>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label>@_Localizer["Name"]</label>
+        <input name="partyName" type="text" class="form-control"/>
+    </div>
+    <button type="submit" class="btn btn-primary">@_Localizer["Register"]</button>
+</form>
+
+<button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "SuperAdmin") + "'")">@_Localizer["Return to dashboard"]</button>

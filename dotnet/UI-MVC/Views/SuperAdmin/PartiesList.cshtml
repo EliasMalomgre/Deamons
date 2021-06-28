@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model IEnumerable<BL.Domain.Test.Party>
+@inject IViewLocalizer _Localizer
+
+@{
+    ViewBag.Title = _Localizer["Party overview"];
+    Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+<p>
+    <a class="btn btn-primary mb-2" asp-action="CreateParty">@_Localizer["New Party"]</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>@_Localizer["Name"]</th>
+        <th>@_Localizer["Orientation"]</th>
+        <th>@_Localizer["Party Leader"]</th>
+        <th>@_Localizer["Colour"]</th>
+        <th>@_Localizer["Logo"]</th>
+        <th></th>
+    </tr>
+    @foreach (var party in Model)
+    {
+        <tr>
+            <td>@party.Name</td>
+            <td>@party.Orientation</td>
+            <td>@party.PartyLeader</td>
+            <td>@party.Colour</td>
+            <td>
+                <img src="@party.ImageLink" height="20px" alt="@_Localizer["Logo"]">
+            </td>
+            <td>
+                <a asp-action="MediaManager" asp-route-partyId="@party.Name">@_Localizer["Manage media"]</a>
+                | <a asp-action="ModifyParty" asp-route-partyId="@party.Name">@_Localizer["Edit"]</a>
+                | <a asp-action="DeleteParty" asp-route-partyId="@party.Name">@_Localizer["Delete"]</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<button type="submit" class="btn btn-primary" onclick="@("window.location.href='" + Url.Action("Index", "SuperAdmin") + "'")">@_Localizer["Return to dashboard"]</button>

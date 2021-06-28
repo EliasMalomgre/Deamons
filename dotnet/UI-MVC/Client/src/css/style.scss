@@ -1,0 +1,145 @@
+﻿@charset "UTF-8";
+@use "_variables" as v;
+
+@use "bootstrap/scss/bootstrap" with (
+  $body-bg: v.$background,
+  $primary: v.$primary,
+  $secondary: v.$secondary,
+  $input-bg: v.$input,
+  $spacer: 5rem
+  
+);
+
+#translator{
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
+}
+
+body {
+ /* background: url(../img/bg.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;*/
+}
+
+/*
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}*/
+
+#container{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.footer{
+  background-color: lightblue;
+  max-height: 70px ;
+  
+  
+  //filter: grayscale(100%);
+}
+
+#container {
+  width: 100%;
+  display: inline-block;
+}
+
+/** HEADER */
+
+/** NAVIGATION BAR */
+nav {
+  overflow: hidden;
+  background-color: v.$primary;
+  top: 0;
+  width: 100%;
+  ul {
+    text-align: center;
+    list-style-type: none;
+    li {
+      display: inline;
+      a {
+        color: #f2f2f2;
+        text-decoration: none;
+        //padding: 14px;
+        &:hover {
+          color: v.$primary;
+          background-color: v.$secondary;
+
+        }
+      }
+    }
+  }
+}
+
+.content {
+  text-align: center;
+}
+
+.card{
+  display: table-cell;
+   vertical-align: middle;
+ }
+.card-body{
+  display: table-cell;
+    vertical-align: middle;
+
+}
+
+
+//PARTIES SELECTION
+.party-selection-button{
+  img{
+    width: 10em;
+  }
+  border-width: 0.5em;
+  padding: 1em 1em 1em 1em;
+  margin: 3em 3em 3em 3em;
+}
+
+.green-border{
+  border-color: green;
+}
+.red-border{
+  border-color: red;
+}
+
+
+
+
+
+

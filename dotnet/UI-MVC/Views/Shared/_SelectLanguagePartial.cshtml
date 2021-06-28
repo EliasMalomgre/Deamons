@@ -1,0 +1,28 @@
+﻿@using System.Threading
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@inject IViewLocalizer _Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .Select(c => new SelectListItem {Value = c.Name, Text = c.DisplayName})
+        .ToList();
+    var cult = Thread.CurrentThread.CurrentCulture.IetfLanguageTag;
+    //maakt lijst van de ondersteunde cultures
+}
+
+<div class="ml-2 " id="translator" title="@_Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
+
+    <form class="form-inline my-2 my-lg-0" id="selectLanguage" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@Context.Request.Path" method="post" class="form-horizontal" role="form">
+        @*<p> @_Localizer["Language: "]</p>*@
+        <div class="input-group">
+            <select style="background-color: #f2f8fc;" class="custom-select form-control" name="culture" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems"></select>
+            <div class="input-group-append">
+                <button class="btn btn-outline-dark text-white bg-dark" type="submit">@_Localizer["Save"]</button>
+            </div>
+        </div>
+    </form>
+</div>

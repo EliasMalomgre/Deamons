@@ -1,0 +1,78 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _Localizer﻿
+@{
+    Layout = "_Layout";
+}
+<div class="content">
+    <a target="_blank" href="#">
+        <div class="overlay mt-n1"></div>
+        <div class="opacity">
+        </div>
+    </a>
+</div>
+<div class="row mt-3">
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/start.png" class="card-img-top w-25 align-self-center" alt="@_Localizer﻿["Start Session"]">
+        <div class="card-body"><h5 class="card-title">@_Localizer﻿["Start Session"]</h5>
+            <p class="card-text">@_Localizer﻿["start a session to play with your students"]</p>
+            <a asp-action="StartSession" class="btn btn-primary btn-lg">@_Localizer﻿["Start Session"]</a>
+        </div>
+    </div>
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/search.png" class="card-img-top w-25 align-self-center" alt="@_Localizer﻿["Show Sessions"]">
+        <div class="card-body">
+            <h5 class="card-title">@_Localizer﻿["Show Sessions"]</h5><p class="card-text">@_Localizer﻿["Show your sessions which you can run later on"]</p>
+            <a asp-action="ShowSessions" class="btn btn-primary btn-lg">@_Localizer﻿["Show Sessions"]</a>
+        </div>
+    </div>
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/search.png" class="card-img-top w-25 align-self-center" alt=@_Localizer﻿["Show Tests"]>
+        <div class="card-body">
+            <h5 class="card-title">@_Localizer﻿["Show Tests"]</h5>
+            <p class="card-text">@_Localizer﻿["Show the test which you have already created"]</p>
+            <a asp-action="TestList" class="btn btn-primary btn-lg">@_Localizer﻿["Show Tests"]</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/search.png" class="card-img-top w-25 align-self-center" alt="@_Localizer﻿["Show Classes"]">
+        <div class="card-body">
+            <h5 class="card-title">@_Localizer﻿["Show Classes"]</h5>
+            <p class="card-text">@_Localizer﻿["Show all of the classes that you teach."]</p>
+            <a asp-action="ClassList" class="btn btn-primary btn-lg">@_Localizer﻿["Show Classes"]</a>
+        </div>
+    </div>
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/browse.png" class="card-img-top w-25 align-self-center" alt="@_Localizer﻿["Browse shared tests"]">
+        <div class="card-body">
+            <h5 class="card-title">@_Localizer﻿["Browse shared tests"]</h5>
+            <p class="card-text">@_Localizer﻿["Look in all of the shared tests of other teachers"]</p>
+            <a asp-action="BrowseSharedTests" class="btn btn-primary btn-lg">@_Localizer﻿["Browse shared tests"]</a>
+        </div>
+    </div>
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/create.png" class="card-img-top w-25 align-self-center" alt=@_Localizer﻿["Create Test"]>
+        <div class="card-body">
+            <h5 class="card-title">@_Localizer﻿["Create Test"]</h5>
+            <p class="card-text">@_Localizer﻿["You can create your own tests right here."]</p>
+            <a asp-action="CreateTest" class="btn  btn-primary btn-lg">@_Localizer﻿["Create Test"]</a>
+        </div>
+    </div>
+</div>
+
+@{
+    if (ViewBag.error != null)
+    {
+        <div class="d-inline-flex p-1 m-1" id="error">
+            <p class="text-danger">@ViewBag.Error</p>
+        </div>
+    }
+}
+
+
+@section Scripts
+{
+    <script type="module" src="~/dist/teacherIndex.entry.js" defer></script>
+    <link rel="stylesheet" href="~/dist/teacherIndex.css"/>
+}

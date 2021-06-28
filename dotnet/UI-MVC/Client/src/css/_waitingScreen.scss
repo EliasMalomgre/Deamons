@@ -1,0 +1,84 @@
+﻿@use "variables" as v;
+
+@use "bootstrap/scss/bootstrap" with (
+  $body-bg: v.$background,
+  $primary: v.$primary,
+  $secondary: v.$secondary,
+  $input-bg: v.$input,
+  $spacer: 5rem
+);
+
+
+.loader {
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 10px;
+  border: 50px solid transparent;
+  position: relative;
+  padding: 40px;
+}
+
+.loader:before {
+  content: '';
+  border: 30px solid v.$primary;
+  border-radius: 10px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  bottom: -40px;
+  left: -40px;
+}
+
+.loader .loaderBar {
+  position: absolute;
+  border-radius: 10px;
+  top: 0;
+  right: 100%;
+  bottom: 0;
+  left: 0;
+  background: v.$primary;
+  width: 0;
+  animation: borealisBar 2s linear infinite;
+}
+
+@keyframes borealisBar {
+  0% {
+    left: 0%;
+    right: 100%;
+    width: 0%;
+  }
+  10% {
+    left: 0%;
+    right: 75%;
+    width: 25%;
+  }
+  90% {
+    right: 0%;
+    left: 75%;
+    width: 25%;
+  }
+  100% {
+    left: 100%;
+    right: 0%;
+    width: 0%;
+  }
+}
+
+
+
+#waitingS {
+  border-radius: 10px;
+  background-color: rgb(200,200,200,0.8);
+}
+
+#priv {
+  color: black;
+}
+
+body {
+  >.container{
+    margin-bottom: -1;
+  }
+}
+
+

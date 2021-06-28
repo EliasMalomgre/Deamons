@@ -1,0 +1,37 @@
+﻿@using BL.Domain.Test
+@using Microsoft.AspNetCore.Mvc.Localization
+@model BL.Domain.Test.Party
+@inject IViewLocalizer _Localizer
+
+@{
+    ViewBag.Title = _Localizer["Edit answers"];
+    Layout = "_Layout";
+    var statements = ViewBag.data as List<Statement>;
+    var answers = ViewBag.answers as List<Answer>;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>@_Localizer["#"]</th>
+        <th>@_Localizer["Statement"]</th>
+        <th>@_Localizer["Answer"]</th>
+        <th>@_Localizer["Argument"]</th>
+        <th></th>
+    </tr>
+    @for (var i = 0; i < statements.Count(); i++)
+    {
+        <tr>
+            <td>@statements[i].Id</td>
+            <td>@statements[i].Text</td>
+            <td>@answers[i].ChosenAnswer.Opinion</td>
+            <td>@answers[i].Argument</td>
+            <td>
+                <a asp-action="ModifyAnswer" asp-route-partyId="@Model.Name" asp-route-statementId="@statements[i].Id">@_Localizer["Edit"]</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<a asp-action="PartiesList" class="btn btn-dark">@_Localizer["Back to list"]</a>

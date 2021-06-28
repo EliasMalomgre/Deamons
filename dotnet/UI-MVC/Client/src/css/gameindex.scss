@@ -1,0 +1,120 @@
+﻿@use "variables" as v;
+
+@use "bootstrap/scss/bootstrap" with (
+  $body-bg: v.$background,
+  $primary: v.$primary,
+  $secondary: v.$secondary,
+  $input-bg: v.$input,
+  $light: v.$light,
+  $modal-backdrop-opacity: v.$modal-backdrop-opacity
+);
+
+body{
+  background: url(../img/blur.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  animation-name: color;
+  animation-duration: 10s;
+  animation-iteration-count: infinite
+}
+
+#maindiv{
+  max-width: 40000px;
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+}
+
+main{
+  max-width: 4000px;
+  height: 100%;
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  align-items: center;
+}
+
+@keyframes color {
+  0% {background-color: dodgerblue}
+  50% {background-color: v.$secondary}
+  100% { background-color: dodgerblue}
+}
+
+
+.frm {
+  font-family: 'Allerta', sans-serif;
+  text-align: center;
+  font-size: 200%;
+  background: v.$input;
+  backdrop-filter: opacity(v.$modal-backdrop-opacity);
+  margin: -10% 25%;
+  border-radius: 10%;
+  
+  
+  /*filter: opacity(50%);
+  .content{
+    filter: opacity(0%);
+  }*/
+  
+}
+
+#LeerkrachtSessieCode{
+  font-size: 250%;
+  width: 59%;
+  border-radius: 3%;
+  text-align: center;
+  
+}
+
+footer{
+  background: v.$input;
+  backdrop-filter: opacity(v.$modal-backdrop-opacity);
+  .container{
+    max-width: none;
+  }
+  
+}
+
+
+
+#startButton{
+  padding: 5%;
+  font-size: 150%;
+  border-radius: 10%;
+
+
+
+  p {
+    font-family: 'Roboto';
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFF;
+    user-select: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+
+}
+
+
+
+.navbar{
+  background-color: transparent;
+  visibility: hidden;
+  
+}
+
+
+h2{
+  font-family: AcmeFont, serif;
+  text-align: center;
+  font-size: 250%;
+  margin-top: 15%;
+}
+
+

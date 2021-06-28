@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.SessionViewModel
+@inject IViewLocalizer _Localizer
+
+@{
+    ViewBag.Title = _Localizer["Debate result"];
+    Layout = "_LayoutNoFooter";
+}
+
+<h2 class="h2">@_Localizer["Test result"]</h2>
+
+<canvas style="height: 250px" id="chartContainer"></canvas>
+
+<table class="table table-hover">
+    <tr>
+        <th>#</th>
+        <th>@_Localizer["Statement"]</th>
+        <th>@_Localizer["Answer"]</th>
+    </tr>
+    @for (var i = 0; i < ViewBag.Answers.Count; i++)
+    {
+        <tr>
+            <td>@(i + 1)</td>
+            <td>@ViewBag.Statements[i].Text</td>
+            <td>@ViewBag.Answers[i].ChosenAnswer.Opinion</td>
+        </tr>
+    }
+</table>
+<button type="submit" class="btn btn-primary my-1" onclick="@("window.location.href='" + Url.Action("Index", "Game") + "'")">@_Localizer["End game"]</button>
+<input type="hidden" value="@Model.TeacherSessionCode" id="teacherSessionCode"/>
+
+@section Scripts
+{
+    <script src="~/dist/sendRefreshSignal.entry.js" defer></script>
+    <script src="~/dist/customDebateResult.entry.js" defer></script>
+}

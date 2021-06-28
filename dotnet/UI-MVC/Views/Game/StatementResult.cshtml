@@ -1,0 +1,108 @@
+﻿@inject IViewLocalizer _Localizer
+@using System.Text.RegularExpressions
+@using BL.Domain.Test
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.SessionViewModel
+@{
+    ViewBag.Title = _Localizer["Statement Result"];
+    Layout = "_LayoutNoFooter";
+}
+
+<h3 class="h3"></h3>
+<h2 id="statement">
+    @foreach (string word in ViewBag.Statement.Text.Split(' '))
+    {
+        var notChanged = true;
+        if (ViewBag.Definition)
+        {
+            foreach (Definition definition in ViewBag.Definitions)
+            {
+                if (notChanged && Regex.IsMatch(word, @"\b" + definition.Word + @"[.,?!]?\b", RegexOptions.IgnoreCase))
+                {
+                    <a href="#">@(word + " ")</a>
+                    <input type="hidden" value="@definition.Explanation" id="@definition.Word"/>
+                    notChanged = false;
+                }
+            }
+        }
+
+        if (notChanged)
+        {
+            @(word + " ")
+        }
+    }
+
+</h2>
+
+<div class="container">
+    <div class="row justify-content-around">
+        @for (var i = 0; i < ViewBag.AnswerOptions.Count; i++)
+        {
+            @if (ViewBag.AnswerOptions[i].Id != 3)
+            {
+                <div class="col">
+                    @{
+                        if (ViewBag.AnswerOptions[i].Id == 1)
+                        {
+                            <h3>@_Localizer["Agree"]</h3>
+                            @for (var j = 0; j < ViewBag.PartyAnswers.Count; j++)
+                            {
+                                if (ViewBag.PartyAnswers[j].ChosenAnswer.Id == ViewBag.AnswerOptions[i].Id)
+                                {
+                                    <div name="party">
+                                        <p>@ViewBag.Parties[j].Name: @ViewBag.PartyAnswers[j].Argument</p>
+                                    </div>
+                                }
+                            }
+                        }
+                        else if (ViewBag.AnswerOptions[i].Id == 2)
+                        {
+                            <h3>@_Localizer["Disagree"]</h3>
+                            @for (var j = 0; j < ViewBag.PartyAnswers.Count; j++)
+                            {
+                                if (ViewBag.PartyAnswers[j].ChosenAnswer.Id == ViewBag.AnswerOptions[i].Id)
+                                {
+                                    <div name="party">
+                                        <p>@ViewBag.Parties[j].Name: @ViewBag.PartyAnswers[j].Argument</p>
+                                    </div>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <h3>@ViewBag.AnswerOptions[i].Opinion</h3>
+                            @for (var j = 0; j < ViewBag.PartyAnswers.Count; j++)
+                            {
+                                if (ViewBag.PartyAnswers[j].ChosenAnswer.Id == ViewBag.AnswerOptions[i].Id)
+                                {
+                                    <div name="party">
+                                        <p>@ViewBag.Parties[j].Name: @ViewBag.PartyAnswers[j].Argument</p>
+                                    </div>
+                                }
+                            }
+                        }
+                    }
+                    
+                </div>
+            }
+        }
+    </div>
+    <div id="definitionField" class="container bg-light w-100 h-100" style="display: none">
+        <h4 id="word"></h4>
+        <p id="explanation"></p>
+    </div>
+    <form>
+        <partial name="_HiddenSessieViewModel" model="@Model"/>
+        <button type="submit" class="btn btn-primary" id="previous" asp-controller="Game" asp-action="StatementResult">@_Localizer["Previous statement"]</button>
+        <button type="submit" class="btn btn-primary" asp-controller="Game" asp-action="DebateResult">@_Localizer["Full result"]</button>
+        <button type="submit" class="btn btn-primary" id="next" asp-controller="Game" asp-action="StatementResult">@_Localizer["Next statement"]</button>
+    </form>
+
+    <button type="submit" class="btn btn-primary my-1" onclick="@("window.location.href='" + Url.Action("Index", "Game") + "'")">@_Localizer["End game"]</button>
+</div>
+
+@section Scripts
+{
+    <script src="~/dist/defenitions.entry.js" defer></script>
+    <script src="~/dist/statementsresult.entry.js"></script>
+}

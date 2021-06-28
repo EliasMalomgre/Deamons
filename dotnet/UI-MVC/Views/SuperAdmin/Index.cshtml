@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _Localizer
+@{
+    ViewBag.Title = _Localizer["SuperAdmin"];
+    Layout = "_Layout";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row mt-3">
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/create.png" class="card-img-top w-25 align-self-center" alt=@_Localizer["Party list"]>
+        <div class="card-body">
+            <h5 class="card-title">@_Localizer["Party list"]</h5>
+            <p class="card-text">@_Localizer["Show your sessions which you can run later on"]</p>
+            <a asp-action="PartiesList" class="btn  btn-primary btn-lg">@_Localizer["Party list"]</a>
+        </div>
+    </div>
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/search.png" class="card-img-top w-25 align-self-center" alt=@_Localizer["Create school"]>
+        <div class="card-body">
+            <h5 class="card-title">@_Localizer["Create school"]</h5>
+            <p class="card-text">@_Localizer["You can create a new school from right over here."]</p>
+            <a asp-action="RequestAccount" class="btn btn-primary btn-lg">@_Localizer["Create school"]</a>
+        </div>
+    </div>
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/start.png" class="card-img-top w-25 align-self-center" alt="@_Localizer["Manage tags"]">
+        <div class="card-body">
+            <h5 class="card-title">@_Localizer["Manage tags"]</h5>
+            <p class="card-text">@_Localizer["You can manage all of your tags here."]</p>
+            <a asp-action="TagList" class="btn btn-primary btn-lg">@_Localizer["Manage tags"]</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/search.png" class="card-img-top w-25 align-self-center" alt="@_Localizer["Admin List"]">
+        <div class="card-body mb-n3">
+            <h5 class="card-title">@_Localizer["Admin List"]</h5>
+            <p class="card-text">@_Localizer["Manage all of your schools from this page."]</p>
+            <a asp-action="AdminList" class="btn btn-primary btn-lg">@_Localizer["Admin List"]</a>
+        </div>
+    </div>
+
+    <div class="card p-1 m-1 text-center" style="width: 20rem; height: 18rem">
+        <img src="img/search.png" class="card-img-top w-25 align-self-center" alt="@_Localizer["Manage CSV"]">
+        <div class="card-body">
+            <h5 class="card-title">@_Localizer["Manage CSV"]</h5>
+            <p class="card-text">@_Localizer["Manage your new CSV files right here."]</p>
+            <a asp-action="ManageCSV" class="btn btn-primary btn-lg">@_Localizer["Manage CSV"]</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="module" src="~/dist/teacherIndex.entry.js" defer></script>
+    <link rel="stylesheet" href="~/dist/teacherIndex.css"/>
+}

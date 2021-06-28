@@ -1,0 +1,34 @@
+@inject IViewLocalizer _Localizer
+@using BL.Domain.Test
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.TeacherSessionViewModel
+@{
+    ViewBag.Title = _Localizer["Parties Selection"];
+    Layout = "_Layout";
+}
+
+<h2 class="h2">@_Localizer["Select the parties you want to use for the test"]</h2>
+
+<form asp-controller="Teacher" asp-action="PartiesSelection" method="post" id="partyParent">
+    <partial name="_HiddenTeacherSessionViewModel" model="@Model"/>
+    <input type="hidden" name="preparingSession" value="@ViewBag.PreparingSession.ToString()"/>
+    <div class="container">
+        <button type="submit" class="btn btn-primary ml-auto">@_Localizer["Select parties"]</button>
+        <p class="text-danger">@ViewBag.Error</p>
+        <div class="container">
+            @foreach (Party party in ViewBag.Parties)
+            {
+                <button id="@party.Name" type="button" class="btn green-border ml-auto party-selection-button">
+                    <img src="@party.ImageLink" alt="Party logo">
+                </button>
+                <input type="hidden" id="@(party.Name + "hidden")" name="parties" value="@party.Name"/>
+            }
+
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script src="~/dist/partiesSelection.entry.js" defer></script>
+}

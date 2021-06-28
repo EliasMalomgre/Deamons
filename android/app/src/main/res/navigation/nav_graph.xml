@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/connect">
+
+    <fragment
+        android:id="@+id/connect"
+        android:name="be.kdg.stemtest.view.fragments.Connect"
+        android:label="connect_fragment"
+        tools:layout="@layout/connect_fragment" >
+        <action
+            android:id="@+id/action_connect_to_selecteer_partij"
+            app:destination="@id/selecteer_partij"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <argument
+            android:name="code"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_connect_to_wachtscherm"
+            app:destination="@id/wachtscherm"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_connect_to_scanner"
+            app:destination="@id/scanner"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_connect_to_privacyStatement"
+            app:destination="@id/privacyStatement"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/selecteer_partij"
+        android:name="be.kdg.stemtest.view.fragments.partygame.SelectParty"
+        android:label="selecteer_partij_fragment"
+        tools:layout="@layout/selecteer_partij_fragment" >
+
+        <action
+            android:id="@+id/action_selecteer_partij_to_stelling"
+            app:destination="@id/stelling"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out">
+
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/stelling"
+        android:name="be.kdg.stemtest.stelling"
+        android:label="stelling_fragment"
+        tools:layout="@layout/stelling_fragment" >
+        <action
+            android:id="@+id/action_stelling_self"
+            app:destination="@id/stelling"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/wachtscherm"
+        android:name="be.kdg.stemtest.view.fragments.Waitingscreen"
+        android:label="wachtscherm_fragment"
+        tools:layout="@layout/wachtscherm_fragment" >
+        <action
+            android:id="@+id/action_wachtscherm_to_dgStelling"
+            app:destination="@id/dgStelling"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_wachtscherm_to_dgResult"
+            app:destination="@id/dgResult"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_wachtscherm_to_CDgResult"
+            app:destination="@id/CDgResult"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_wachtscherm_to_CPgResult"
+            app:destination="@id/CPgResult"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_wachtscherm_to_resultaat2"
+            app:destination="@id/resultaat"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultaat"
+        android:name="be.kdg.stemtest.view.fragments.partygame.PgResultaat"
+        android:label="resultaat_fragment"
+        tools:layout="@layout/resultaat_fragment" >
+        <action
+            android:id="@+id/action_resultaat_to_pgResultDetail"
+            app:destination="@id/pgResultDetail"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_resultaat_to_pgdg_more_info"
+            app:destination="@id/pgdg_more_info"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity2"
+        android:name="be.kdg.stemtest.view.MainActivity"
+        android:label="MainActivity" />
+    <fragment
+        android:id="@+id/scanner"
+        android:name="be.kdg.stemtest.view.fragments.Scanner"
+        android:label="Scanner" >
+        <action
+            android:id="@+id/action_scanner_to_connect"
+            app:destination="@id/connect" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dgStelling"
+        android:name="be.kdg.stemtest.view.fragments.StatementFragment"
+        android:label="dg_stelling_fragment"
+        tools:layout="@layout/dg_stelling_fragment" >
+        <action
+            android:id="@+id/action_dgStelling_to_wachtscherm"
+            app:destination="@id/wachtscherm"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dgResult"
+        android:name="be.kdg.stemtest.view.fragments.debategame.DgResult"
+        android:label="dg_result_fragment"
+        tools:layout="@layout/dg_result_fragment" />
+    <fragment
+        android:id="@+id/CDgResult"
+        android:name="be.kdg.stemtest.view.fragments.customdebategame.CDgResult"
+        android:label="c_dg_result_fragment"
+        tools:layout="@layout/c_dg_result_fragment" >
+        <action
+            android:id="@+id/action_CDgResult_to_pieFragment"
+            app:destination="@id/pieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/CPgResult"
+        android:name="be.kdg.stemtest.view.fragments.custompartygame.CPgResult"
+        android:label="c_pg_result_fragment"
+        tools:layout="@layout/c_pg_result_fragment" />
+    <fragment
+        android:id="@+id/pgResultDetail"
+        android:name="be.kdg.stemtest.view.fragments.partygame.PgResultDetail"
+        android:label="pg_result_detail_fragment"
+        tools:layout="@layout/pg_result_detail_fragment" />
+    <fragment
+        android:id="@+id/pieFragment"
+        android:name="be.kdg.stemtest.view.fragments.customdebategame.PieFragment"
+        android:label="pie_fragment"
+        tools:layout="@layout/pie_fragment" />
+    <fragment
+        android:id="@+id/pgdg_more_info"
+        android:name="be.kdg.stemtest.view.fragments.MoreInfo"
+        android:label="fragment_pgdg_more_info"
+        tools:layout="@layout/fragment_pgdg_more_info" />
+    <fragment
+        android:id="@+id/privacyStatement"
+        android:name="be.kdg.stemtest.view.fragments.PrivacyStatement"
+        android:label="fragment_privacy_statement"
+        tools:layout="@layout/fragment_privacy_statement"/>
+</navigation>

@@ -1,0 +1,76 @@
+﻿@inject IViewLocalizer _Localizer
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.SessionViewModel
+@{
+    ViewBag.Title = _Localizer["Test Result"];
+    Layout = "_LayoutNoFooter";
+}
+<h2 class="h2">@Model.PartyName</h2>
+<h2 >@_Localizer["Test result:"] @ViewBag.Result </h2>
+
+<button type="button" class="btn btn-primary mb-2" id="hide">@_Localizer["Show wrong answers"]</button>
+<table id="answerTable" class="table">
+    <tr>
+        <th>#</th>
+        <th>@_Localizer["Correct"]</th>
+        <th>@_Localizer["Statement"]</th>
+        <th>@_Localizer["Answer"]</th>
+        <th>@_Localizer["Party Answer"]</th>
+        <th>@_Localizer["Explanation"]</th>
+    </tr>
+
+    @for (var i = 0; i < ViewBag.Answers.Count; i++)
+    {
+        <tr>
+            <th>@(i + 1)</th>
+            <td>
+                <input type="checkbox" checked="@ViewBag.Answers[i].Correct" disabled="disabled"/>
+            </td>
+            <td>@ViewBag.Statements[i].Text</td>
+            <td>@{if (ViewBag.Answers[i].ChosenAnswer.Id == 1)
+                    {
+                        @_Localizer["Agree"]    
+                    }
+
+                    else if (@ViewBag.Answers[i].ChosenAnswer.Id == 2)
+                    {
+                          @_Localizer["Disagree"]
+                    }
+                    else
+                    {
+                        @ViewBag.Answers[i].ChosenAnswer.Opinion
+                    }
+                }</td>
+            <td>@{if (ViewBag.PartyAnswers[i].ChosenAnswer.Id == 1)
+                  {
+                      @_Localizer["Agree"]    
+                  }
+
+                  else if (ViewBag.PartyAnswers[i].ChosenAnswer.Id == 2)
+                  {
+                      @_Localizer["Disagree"]
+                  }
+                  else
+                  {
+                      @ViewBag.PartyAnswers[i].ChosenAnswer.Opinion
+                  }
+                }</td>
+            <td>@ViewBag.PartyAnswers[i].Argument</td>
+        </tr>
+    }
+</table>
+
+<form asp-controller="Game" asp-action="ShowParty">
+    <partial name="_HiddenSessieViewModel" model="@Model"/>
+    <button type="submit" class="btn btn-primary">@_Localizer["Show party"]</button>
+</form>
+
+<button type="submit" class="btn btn-primary my-1" onclick="@("window.location.href='" + Url.Action("Index", "Game") + "'")">@_Localizer["End game"]</button>
+
+
+@section Scripts
+{
+    <script src="~/dist/result.entry.js" defer></script>
+    <script src="~/dist/sendRefreshSignal.entry.js" defer></script>
+
+}

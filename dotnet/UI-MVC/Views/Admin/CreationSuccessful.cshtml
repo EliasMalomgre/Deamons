@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _Localizer
+@{
+    ViewBag.Title = _Localizer["Creation Successful"];
+    Layout = "_Layout";
+}
+
+<h2>@_Localizer["Teacher added"]</h2>
+<p>@_Localizer["Successfully sent activation email to teacher."]</p>
+
+<button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "Admin") + "'")">@_Localizer["Return to dashboard"]</button>

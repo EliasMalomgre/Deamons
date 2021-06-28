@@ -1,0 +1,96 @@
+﻿@inject IViewLocalizer _Localizer
+@using System.Text.RegularExpressions
+@using BL.Domain.Test
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.SessionViewModel
+@{
+    ViewBag.Title = _Localizer["Answer Statement"];
+    Layout = "_LayoutNoFooter";
+}
+<div class="container bg-light p-2 justify-content-between" id="frm">
+    <div class="progress mb-4">
+        <div class="progress-bar" id="progress" role="progressbar" aria-valuenow="@Model.CurrentStatementId" aria-valuemin="0" aria-valuemax="@Model.StatementCount"></div>
+    </div>
+    <h2 class="h2 font-weight-bold">@Model.PartyName</h2>
+    <h2 class="h2 mb-3" id="statement">
+        @foreach (string word in ViewBag.Statement.Text.Split(' '))
+        {
+            var notChanged = true;
+            if (ViewBag.Definition)
+            {
+                foreach (Definition definition in ViewBag.Definitions)
+                {
+                    if (notChanged && Regex.IsMatch(word, @"\b" + definition.Word + @"[.,?!]?\b", RegexOptions.IgnoreCase))
+                    {
+                        <a href="#">@(word + " ")</a>
+                        <input type="hidden" value="@definition.Explanation" id="@definition.Word"/>
+                        notChanged = false;
+                    }
+                }
+            }
+
+            if (notChanged)
+            {
+                @(word + " ")
+            }
+        }
+    </h2>
+    <form asp-controller="Game" asp-action="WaitingScreen" method="post" id="form">
+        <partial name="_HiddenSessieViewModel" model="@Model"/>
+        <input type="hidden" name="answerId" id="answer"/>
+        <div class="row-cols-4 text-center">
+            @foreach (AnswerOption answerOption in ViewBag.AnswerOptions)
+            {
+                @if (answerOption.Id != 3)
+                {
+                    if (answerOption.Id == 1)
+                    {
+                        <button type="submit" class="btn btn-secondary m-2 w-50 h-100">@_Localizer["Agree"]</button>
+                        <input type="hidden" id="@_Localizer["Agree"]" value="@answerOption.Id"/>
+                    }
+
+                    else if (answerOption.Id == 2)
+                    {
+                        <button type="submit" class="btn btn-secondary m-2 w-50 h-100">@_Localizer["Disagree"]</button>
+                        <input type="hidden" id="@_Localizer["Disagree"]" value="@answerOption.Id"/>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-secondary m-2 w-50 h-100">@answerOption.Opinion</button>
+                        <input type="hidden" id="@answerOption.Opinion" value="@answerOption.Id"/>
+                    }
+                }
+            }
+        </div>
+        <div class="row-cols-1 text-center">
+            @if (ViewBag.Skip)
+            {
+                @foreach (AnswerOption answerOption in ViewBag.AnswerOptions)
+                {
+                    @if (answerOption.Id == 3)
+                    {
+                        <button type="submit" class="btn btn-primary w-50 h-100">@_Localizer["Skip"]</button>
+                        <input type="hidden" id="@_Localizer["Skip"]" value="3"/>
+                    }
+                }
+            }
+        </div>
+        @if (ViewBag.Arguments)
+        {
+            <input type="text" name="argument" placeholder="Argument" required class="form-control mt-4" id="argument"/>
+        }
+    </form>
+</div>
+<div id="definitionField" class="container bg-light" style="display: none">
+    <h4 id="word"></h4>
+    <p id="explanation"></p>
+</div>
+
+@section Scripts
+{
+    <script src="~/dist/defenitions.entry.js" defer></script>
+    <script src="~/dist/answerStatement.entry.js" defer></script>
+    <script src="~/dist/progressbar.entry.js" defer></script>
+    <script src="~/dist/signalr.entry.js"></script>
+    <script src="~/dist/refreshCodeScreen.entry.js" defer></script>
+}

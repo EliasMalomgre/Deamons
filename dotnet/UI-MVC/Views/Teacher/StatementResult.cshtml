@@ -1,0 +1,152 @@
+﻿@inject IViewLocalizer _Localizer
+@using BL.Domain.Sessie
+@using BL.Domain.Test
+@using Microsoft.AspNetCore.Mvc.Localization
+@model UI.MVC.Models.TeacherSessionViewModel
+
+@{
+    ViewBag.Title = _Localizer["Statement Result"];
+    Layout = "_Layout";
+}
+<div class="container text-center">
+    <h2>@_Localizer["Sessioncode:"] @Model.SessionCode</h2>
+</div><div class="container bg-light">
+    <h2 class="h2">@_Localizer["Result of:"] @ViewBag.Statement.Text</h2>
+
+    <div class="container">
+        <div class="row justify-content-around">
+            @for (var i = 0; i < ViewBag.AnswerOptions.Count; i++)
+            {
+                @if (ViewBag.AnswerOptions[i].Id != 3)
+                    {
+                        <div class="col">
+                            @{
+                                if (ViewBag.AnswerOptions[i].Id == 1)
+                                {
+                                    <h3>@_Localizer["Agree:"] @ViewBag.Distribution[i] </h3>
+                                    @foreach (Answer answer in ViewBag.Answers)
+                                    {
+                                        if (answer.ChosenAnswer.Id == ViewBag.AnswerOptions[i].Id)
+                                        {
+                                            <div>
+                                                <p>@answer.Argument</p>
+                                            </div>
+                                        }
+                                    }
+                                    
+                                    @for (var j = 0; j < ViewBag.PartyAnswers.Count; j++)
+                                    {
+                                        if (ViewBag.PartyAnswers[j].ChosenAnswer.Id == ViewBag.AnswerOptions[i].Id)
+                                        {
+                                            <div name="party" style="display: none;">
+                                                <p>@ViewBag.Parties[j].Name: @ViewBag.PartyAnswers[j].Argument</p>
+                                            </div>
+                                        }
+                                    }
+                                }
+                                else if (ViewBag.AnswerOptions[i].Id == 2)
+                                {
+                                    <h3>@_Localizer["Disagree:"] @ViewBag.Distribution[i] </h3>
+                                    @foreach (Answer answer in ViewBag.Answers)
+                                    {
+                                        if (answer.ChosenAnswer.Id == ViewBag.AnswerOptions[i].Id)
+                                        {
+                                            <div>
+                                                <p>@answer.Argument</p>
+                                            </div>
+                                        }
+                                    }
+                                    @for (var j = 0; j < ViewBag.PartyAnswers.Count; j++)
+                                    {
+                                        if (ViewBag.PartyAnswers[j].ChosenAnswer.Id == ViewBag.AnswerOptions[i].Id)
+                                        {
+                                            <div name="party" style="display: none;">
+                                                <p>@ViewBag.Parties[j].Name: @ViewBag.PartyAnswers[j].Argument</p>
+                                            </div>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <h3>@ViewBag.AnswerOptions[i].Opinion: @ViewBag.Distribution[i]</h3>
+                                    @foreach (Answer answer in ViewBag.Answers)
+                                    {
+                                        if (answer.ChosenAnswer.Id == ViewBag.AnswerOptions[i].Id)
+                                        {
+                                            <div>
+                                                <p>@answer.Argument</p>
+                                            </div>
+                                        }
+                                    }
+                                    @for (var j = 0; j < ViewBag.PartyAnswers.Count; j++)
+                                    {
+                                        if (ViewBag.PartyAnswers[j].ChosenAnswer.Id == ViewBag.AnswerOptions[i].Id)
+                                        {
+                                            <div name="party" style="display: none;">
+                                                <p>@ViewBag.Parties[j].Name: @ViewBag.PartyAnswers[j].Argument</p>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        </div>
+                    }
+        
+                
+            
+                @if (ViewBag.AnswerOptions[i].Id == 3 && ViewBag.Skip)
+                {
+                    <div class="col">
+                        <h3>@_Localizer["Skip:"] @ViewBag.Distribution[i] </h3>
+                        @foreach (Answer answer in ViewBag.Answers)
+                        {
+                            if (answer.ChosenAnswer.Id == ViewBag.AnswerOptions[i].Id)
+                            {
+                                <div>
+                                    <p>@answer.Argument</p>
+                                </div>
+                            }
+                        }
+                        @for (var j = 0; j < ViewBag.PartyAnswers.Count; j++)
+                        {
+                            if (ViewBag.PartyAnswers[j].ChosenAnswer.Id == ViewBag.AnswerOptions[i].Id)
+                            {
+                                <div name="party" style="display: none;">
+                                    <p class="p bg-light">@ViewBag.Parties[j].Name: @ViewBag.PartyAnswers[j].Argument</p>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    @if (Model.GameType == GameType.DEBATEGAME)
+    {
+        <button class="btn btn-primary" type="button" id="hide">@_Localizer["Show party answers"]</button>
+    }
+
+    <form asp-controller="Teacher" asp-action="ShowStatement" id="form">
+        <partial name="_HiddenTeacherSessionViewModel" model="@Model"/>
+        <input type="hidden" id="sessionCode" asp-for="SessionCode"/>
+        @{
+            if (Model.CurrentStatement == Model.StatementCount - 1)
+            {
+                <button id="nextStatement" class="btn btn-primary my-2">@_Localizer["Show Result"]</button>
+            }
+            else
+            {
+                <button id="nextStatement" class="btn btn-primary my-2">@_Localizer["Next statement"]</button>
+            }
+        }
+    </form>
+</div>
+
+@section Scripts
+{
+    <script src="~/dist/statementResult.entry.js" defer></script>
+    <script src="~/dist/signalr.entry.js"></script>
+    <script src="~/dist/teacherGame.entry.js" defer></script>
+}

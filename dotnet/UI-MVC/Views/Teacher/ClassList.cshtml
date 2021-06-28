@@ -1,0 +1,35 @@
+﻿@inject IViewLocalizer _Localizer
+@using Microsoft.AspNetCore.Mvc.Localization
+@model IEnumerable<BL.Domain.Sessie.Class>
+
+@{
+    ViewBag.Title = _Localizer["Manage classes"];
+    Layout = "_Layout";
+}
+
+<h2 class="h2">@ViewBag.Title</h2>
+        <button id="startButton" class="btn btn-primary mb-2"><a class="text-white" asp-action="CreateClass" asp-route-teacherId="@ViewBag.teacher">@_Localizer["Make new class"]</a></button>
+<table class="table table-hover">
+    <thead class="table-color">
+    <tr>
+        <th>@_Localizer["Name"]</th>
+        <th>@_Localizer["Amount of students"]</th>
+        <th>@_Localizer["Schoolyear"]</th>
+        <th></th>
+    </tr>
+    </thead>
+    @foreach (var clas in Model)
+    {
+        <tr>
+            <td>@clas.Name</td>
+            <td>@clas.NumberOfStudents</td>
+            <td>@clas.Year</td>
+            <td>
+                <a asp-action="ModifyClass" asp-route-classId="@clas.Id">@_Localizer["Edit"]</a>
+                | <a asp-action="DeleteClass" asp-route-classId="@clas.Id">@_Localizer["Delete"]</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<button type="submit" class="btn btn-primary mt-1" onclick="@("window.location.href='" + Url.Action("Index", "Teacher") + "'")">@_Localizer["Return to dashboard"]</button>

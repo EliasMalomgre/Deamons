@@ -1,0 +1,113 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _Localizer
+@using BL.Domain.Identity
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link runat="server" rel="shortcut icon" href="~/img/favicon.ico" type="image/x-icon"/>
+    <link runat="server" rel="icon" href="~/img/favicon.ico" type="image/ico"/>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - Stemtest_Daemons</title>
+    <script type="module" src="~/dist/site.entry.js" defer></script>
+    <!-- DEZE REFERENTIE IS NORMAAL OVERBODIG, TE VERWIJDEREN -->
+    <link rel="stylesheet" href="~/dist/site.css"/>
+</head>
+<body>
+<header>
+
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-collapse navbar-light bg-accent border-bottom box-shadow mb-0 p-0 fixed-top">
+        <a class="navbar-brand text-white" asp-area="" asp-controller="Teacher" asp-action="Index">
+            <img src="~/img/logonew.png" width="160" height="50" class=" bg-primary ml-3 mr-1" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" id="nabar">
+            <partial name="_LoginPartial"/>
+
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-white disabled invisible" asp-area="" asp-controller="Home" asp-action="Index">@_Localizer["Home"]</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">@_Localizer["Privacy"]</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-area="" asp-controller="Game" asp-action="Index">@_Localizer["Game"]</a>
+                </li>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="ForSchools">@_Localizer["For schools"]</a>
+                    </li>
+                }
+                @if (User.IsInRole("Teacher") || User.IsInRole("Admin") || User.IsInRole("Superadmin"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Teacher" asp-action="Index">@_Localizer["Teacher"]</a>
+                    </li>
+                }
+                @if (User.IsInRole("Admin") || User.IsInRole("Superadmin"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Admin" asp-action="Index">@_Localizer["Admin"]</a>
+                    </li>
+                }
+                @if (User.IsInRole("Superadmin"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="SuperAdmin" asp-action="Index">@_Localizer["SuperAdmin"]</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container mt-3 mb-3" id="maindiv">
+    <main role="main">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="page-footer fixed-bottom font-small mdb-color pt-0">
+    <!-- Footer Links -->
+    <div class="container text-center w-100 text-md-left">
+        <div class="row d-flex align-items-center">
+            <!-- Grid column -->
+            <div class="col-md-6 col-lg-6">
+                <!--Copyright-->
+                <a asp-area="" asp-controller="Home" asp-action="Privacy" class="a nl-1 text-dark font-weight-bolder">Stemtest_Daemons - @_Localizer["Privacy"]</a>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 ml-lg-0">
+                <!-- Social buttons -->
+                <partial name="_SelectLanguagePartial"/>
+
+
+            </div>
+            <div class="col-md-2 col-lg-3">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <button class="btn-dark p-0">
+                        <a class="btn btn-outline-dark text-white bg-dark" id="menu" asp-area="" asp-controller="Teacher" asp-action="Index">@_Localizer["Menu"]</a>
+                    </button>
+                }
+                else
+                {
+                    <button class="btn-dark p-0">
+                        <a class="btn btn-outline-dark text-white bg-dark" id="menu" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</footer>
+@RenderSection("Scripts", false)
+</body>
+</html>

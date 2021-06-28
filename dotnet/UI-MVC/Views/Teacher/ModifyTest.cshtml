@@ -1,0 +1,190 @@
+﻿@using BL.Domain.Test
+@using Microsoft.AspNetCore.Mvc.Localization
+@model List<BL.Domain.Test.Statement>
+@inject IViewLocalizer _Localizer
+
+@{
+    ViewBag.Title = _Localizer["Modify Test"];
+    Layout = "_Layout";
+}
+<div class="container">
+    <h1>@(((Test) ViewData["test"]).Title)</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col bg bg-light mr-2">
+                <form asp-action="AddStatementToTest" id="statementForm">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" name="testId" value="@(((Test) ViewData["test"]).Id)"/>
+                    <div class="form-group">
+                        <label for="statementName">@_Localizer["Statement"]</label>
+                        <input type="text" id="statementName" name="statementName" class="form-control"/>
+                        <p id="statementError" class="text-danger"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="statementExplanation">@_Localizer["Explanation"]</label>
+                        <input type="text" id="statementExplanation" name="statementExplanation" class="form-control"/>
+                    </div>
+
+                    <div class="form-group align-items-start">
+                        <label for="defaultAnswers">@_Localizer["Use default answers"]</label>
+                        <input type="checkbox" value="false" id="defaultAnswers" name="defaultAnswers" class="form-control"/>
+                    </div>
+                    @*default answers:*@
+                    <div class="form-group" id="defaultAnswersSelect" hidden>
+                        <label for="rightAnswer">@_Localizer["Correct Answer"]</label>
+                        <select id="rightAnswer" class="form-control" name="rightAnswer" asp-items="@(new List<SelectListItem>{new SelectListItem {Value = "Akkoord", Text = _Localizer["Agree"].Value},
+                                                                                                        new SelectListItem {Value = "Niet akkoord", Text = _Localizer["Disagree"].Value}})"></select>
+                    </div>
+                    @*custom answers:*@
+                    <div class="form-group" id="customAnswers">
+                        <div class="aogroup form-group" id="answeroptiongroup1">
+                            <label for="ao1">@_Localizer["Answer option 1:"]</label>
+                            <input type="text" id="ao1" name="answerOptions" class="form-control"/>
+                            <label for="aoc1">@_Localizer["Correct answer:"]</label>
+                            <input type="checkbox" name="aocc" id="aoc1" value="false">
+                            <input type="hidden" id="aoch1" name="aoc" value="false"/>
+                        </div>
+                        <div class=" aogroup form-group" id="answeroptiongroup2">
+                            <label for="ao2">@_Localizer["Answer option 2:"]</label>
+                            <input type="text" id="ao2" name="answerOptions" class="form-control"/>
+                            <label for="aoc2">@_Localizer["Correct answer:"]</label>
+                            <input type="checkbox" name="aocc" id="aoc2" value="false">
+                            <input type="hidden" id="aoch2" name="aoc" value="false"/>
+                        </div>
+                        <div class="container mb-2 pl-0">
+                            <button type="button" id="addAo" name="addAo" class="btn btn-primary">@_Localizer["Add answer option"]</button>
+                        </div>
+                    </div>
+                    <p id="aoError" class="text-danger"></p>
+                    <button type="button" class="btn btn-primary" id="newStatement">@_Localizer["Register Answer"]</button>
+                </form>
+                <a asp-action="TestList" class="btn btn-secondary btn-lg my-2">@_Localizer["Finish"]</a>
+            </div>
+            <div class="col bg-light">
+                <table class="table table-hover">
+                    @if (Model != null)
+                    {
+                        <thead class="table-color">
+                        <tr>
+                            <th scope="col">@_Localizer["Statements"]</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var statement  in Model)
+                        {
+                            <tr>
+                                <td>@statement.Text</td>
+                                <td>
+                                    | <a asp-action="ModifyStatement" asp-route-statementId="@statement.Id">@_Localizer["Edit"]</a>
+                                    | <a asp-action="DeleteStatement" asp-route-statementId="@statement.Id", asp-route-testId="@(((Test) ViewData["test"]).Id)">@_Localizer["Delete"]</a>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    }
+                </table>
+                <table class="table table-hover">
+                    <thead class="table-color">
+                    <tr>
+                        <th scope="col">@_Localizer["Tags"]</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        var tags = (IEnumerable<Tag>) ViewData["tags"];
+                        foreach (var tag in tags)
+                        {
+                            <tr>
+                                <td>@tag.Name</td>
+                                <td>
+                                    <a asp-action="DeleteTag" asp-route-tagId="@tag.Id" asp-route-testId="@(((Test) ViewData["test"]).Id)">@_Localizer["Delete"]</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+                <form asp-action="AddTagToTest">
+                    <div class="form-group">
+                        <input name="testId" type="hidden" value="@(((Test) ViewData["test"]).Id)">
+                        <label for="newTag">@_Localizer["New tag:"] </label>
+                        <select name="tagId" id="newTag" class="form-control">
+                            @{
+                                var tagsEmpty = false;
+                                if (ViewData["availableTags"] == null)
+                                {
+                                    tagsEmpty = true;
+                                }
+                                if (!tagsEmpty)
+                                {
+                                    var avTags = (IEnumerable<Tag>) ViewData["availableTags"];
+                                    foreach (var avt in avTags)
+                                    {
+                                        <option value="@avt.Id">@avt.Name</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="0"> No tags available</option>
+                                }
+                            }
+                        </select>
+                        @{
+                            if (!tagsEmpty)
+                            {
+                                <input type="submit" class="btn btn-primary my-2"/>
+                            }
+                        }
+                    </div>
+                </form>
+                <table class="table table-hover">
+                    <thead class="table-color">
+                    <tr>
+                        <th scope="col">@_Localizer["Definitions"]</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        var definitions = (IEnumerable<Definition>) ViewData["definitions"];
+                        foreach (var definition in definitions)
+                        {
+                            <tr>
+                                <td>@definition.Word</td>
+                                <td>@definition.Explanation</td>
+                                <td>
+                                    <a asp-action="DeleteDefinition" asp-route-id="@definition.Id" asp-route-testId="@(((Test) ViewData["test"]).Id)">@_Localizer["Delete"]</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+                <form asp-action="AddDefinitionToTest">
+                    <div class="form-group">
+                        <input name="testId" type="hidden" value="@(((Test) ViewData["test"]).Id)">
+                        <label for="word">@_Localizer["Word:"] </label>
+                        <input type="text" name="word" id="word" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="explanation">@_Localizer["Explanation:"] </label>
+                        <input type="text" name="explanation" id="explanation" class="form-control"/>
+                    </div>
+                    <input type="submit" class="btn btn-primary my-2">
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button type="submit" class="btn btn-primary mt-1 ml-1" onclick="@("window.location.href='" + Url.Action("Index", "Teacher") + "'")">@_Localizer["Return to dashboard"]</button>
+
+
+
+@section Scripts
+{<script src="~/dist/modifyTest.entry.js" defer></script>}

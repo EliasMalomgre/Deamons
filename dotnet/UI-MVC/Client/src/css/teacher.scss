@@ -1,0 +1,47 @@
+﻿@use "variables" as v;
+
+@use "bootstrap/scss/bootstrap" with (
+  $body-bg: v.$background,
+  $primary: v.$primary,
+  $secondary: v.$secondary,
+  $input-bg: v.$input,
+  $spacer: 5rem
+);
+
+body{
+  background-image: url('../img/blur.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+#maindiv{
+  max-width: 9999999px;
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+  
+}
+
+.card { background-color: rgba(245, 245, 245, 0.9);
+  width: 20rem; height: 18rem}
+
+.card-header, .card-footer { opacity: 1}
+
+main{
+  display: inline-block;  
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+}
+
+footer{
+  background: v.$input;
+  backdrop-filter: opacity(v.$modal-backdrop-opacity);
+}
+
+#error{
+  border-radius: 25px;
+  background-color: rgba(245, 245, 245, 0.9);
+  padding: 0;
+}

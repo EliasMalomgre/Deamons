@@ -1,0 +1,20 @@
+﻿/*@use "variables" as v;
+
+@use "bootstrap/scss/bootstrap" with (
+  $body-bg: v.$background,
+  $primary: v.$primary,
+  $secondary: v.$secondary,
+  $input-bg: v.$input,
+  $light: v.$light
+);
+
+.btn{
+  font-size: 100%;
+}
+body{
+  font-size: 200%;
+}*/
+
+.btn{
+  border-width: 10rem;
+}
